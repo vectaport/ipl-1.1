@@ -1,0 +1,10 @@
+XCOMM
+XCOMM include file directory
+XCOMM
+
+PACKAGE = include_ipl
+
+SUBDIRS = \
+	ipl
+
+MakeInSubdirs($(SUBDIRS))

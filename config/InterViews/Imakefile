@@ -1,0 +1,7 @@
+XCOMM
+XCOMM config files for building InterViews libraries and applications
+XCOMM
+
+PACKAGE = config_ivipl
+
+IvmkcmTargets($(PACKAGE))

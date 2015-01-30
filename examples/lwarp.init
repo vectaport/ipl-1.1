@@ -1,0 +1,40 @@
+sel=select(:all)
+select(:clear)
+
+x=0;while(at(sel x).nxtpix==nil x++);nxtpix=at(sel x)
+srcput(nxtpix 100)
+srcput(nxtpix 110)
+srcput(nxtpix 120)
+srcput(nxtpix 130)
+srcput(nxtpix 120)
+srcput(nxtpix 110)
+srcput(nxtpix 100)
+srcput(nxtpix 100)
+
+x=0;while(at(sel x).insegcond==nil x++);insegcond=at(sel x)
+srcput(at(getsrcpipes(insegcond) 0) 0)		 
+srcput(at(getsrcpipes(insegcond) 1) 0)		 
+
+x=0;while(at(sel x).outsegcond==nil x++);outsegcond=at(sel x)
+srcput(at(getsrcpipes(outsegcond) 0) 1)		 
+srcput(at(getsrcpipes(outsegcond) 2) 0)		 
+
+x=0;while(at(sel x).nxtpixstrcnd==nil x++);nxtpixstrcnd=at(sel x)
+srcput(at(getsrcpipes(nxtpixstrcnd) 0) 0)
+
+x=0;while(at(sel x).accumadd==nil x++);accumadd=at(sel x)
+srcput(at(getsrcpipes(accumadd) 1) 0)
+
+x=0;while(at(sel x).onering==nil x++);onering=at(sel x)
+srcput(onering 1.0)
+
+#sizfac=.75
+sizfac=1.33
+x=0;while(at(sel x).sizfacring==nil x++);sizfacring=at(sel x)
+srcput(sizfacring sizfac)		 
+
+x=0;while(at(sel x).insfacring==nil x++);insfacring=at(sel x)
+singlestep(1)
+srcput(insfacring 1.0/sizfac)		 
+
+update

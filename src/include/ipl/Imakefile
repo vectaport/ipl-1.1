@@ -1,0 +1,10 @@
+XCOMM
+XCOMM standard include files for ipl
+XCOMM
+
+PACKAGE = include_ipl_std
+
+IvmkcmTargets($(PACKAGE))
+
+InstallIncludes(ipl)
+

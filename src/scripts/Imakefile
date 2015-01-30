@@ -1,0 +1,7 @@
+XCOMM
+XCOMM scripts - miscellaneous shell scripts
+XCOMM
+
+PACKAGE = scripts_ipl
+
+IvmkcmTargets($(PACKAGE))

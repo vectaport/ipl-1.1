@@ -1,0 +1,16 @@
+XCOMM
+XCOMM everything to be built or installed
+XCOMM
+
+PACKAGE = src_ipl
+
+SUBDIRS = \
+	IplServ \
+        iplserv_ \
+	IplEdit \
+	ipledit_ \
+	include \
+        util \
+	scripts
+
+MakeInSubdirs($(SUBDIRS))

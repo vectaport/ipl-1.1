@@ -1,0 +1,47 @@
+XCOMM
+XCOMM source files for building the IplEdit library
+XCOMM
+
+PACKAGE = IplEdit
+
+#ifdef InObjectCodeDir
+
+LIB = IplEdit
+
+OTHER_CCDEFINES = $(CLIPPOLY_CCDEFINES) $(ACE_CCDEFINES)
+OTHER_CCINCLUDES = $(CLIPPOLY_CCINCLUDES) $(ACE_CCINCLUDES)
+
+Use_libUnidraw()
+Use_2_6()
+
+MakeLibrary($(LIB),$(VERSION))
+
+#define Obj26(file) MakeObjectFromSrcFlags(file,)
+
+Obj26(iplcatalog)
+Obj26(iplcmds)
+Obj26(iplcomps)
+Obj26(iplcreator)
+Obj26(ipleditor)
+Obj26(iplscripts)
+Obj26(iplviewer)
+Obj26(iplviews)
+
+#define Obj31(file) MakeObjectFromSrcFlags(file, -Div2_6_incompatible -Uiv2_6_compatible -I$(IVTOOLSSRC)/include $(TOP_CCINCLUDES))
+
+Obj31(iplabout)
+Obj31(iplimport)
+Obj31(iplkit)
+
+#define Obj_ACE(file) MakeObjectFromSrcFlags(file, -D__ACE_INLINE__ -Uiv2_6_compatible -I$(IVTOOLSSRC)/include $(TOP_CCINCLUDES))
+
+Obj_ACE(iplfunc)
+
+IncludeDependencies()
+
+#else
+
+MakeInObjectCodeDir()
+InstallIncludes($(PACKAGE))
+
+#endif

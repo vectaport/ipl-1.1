@@ -1,0 +1,9 @@
+XCOMM
+XCOMM utilities
+XCOMM
+
+PACKAGE = utils_ipl
+
+SUBDIRS =
+
+MakeInSubdirs($(SUBDIRS))

@@ -1,0 +1,27 @@
+ipledit(5,6
+    frame(
+        pipe( :reqlabel 1 :ellipse 130,475,35,20 :ellipsetrans 1,0,0,1,78,40 :text 12,"A" :texttrans 1,0,0,1,204,508 :fillbg 1 :brush 65535,0 :fgcolor "Black",0,0,0 :bgcolor "White",1,1,1 :font "-*-helvetica-medium-r-normal-*-12-*-*-*-*-*-*-*","Helvetica",12 :graypat 1),
+        pipe( :reqlabel 1 :ellipse 131,363,35,20 :ellipsetrans 1,0,0,1,75.5,40 :text 12,"B" :texttrans 1,0,0,1,203,396 :fillbg 1 :brush 65535,0 :fgcolor "Black",0,0,0 :bgcolor "White",1,1,1 :font "-*-helvetica-medium-r-normal-*-12-*-*-*-*-*-*-*","Helvetica",12 :graypat 1),
+        pipe( :reqlabel 1 :ellipse 385,431,35,20 :ellipsetrans 1,0,0,1,79,32 :text 12,"C" :texttrans 1,0,0,1,460,456 :fillbg 1 :brush 65535,0 :fgcolor "Black",0,0,0 :bgcolor "White",1,1,1 :font "-*-helvetica-medium-r-normal-*-12-*-*-*-*-*-*-*","Helvetica",12 :graypat 1),
+        pipe( :reqlabel 1 :ellipse 556,488,35,20 :ellipsetrans 1,0,0,1,49,30 :text 12,"D" :texttrans 1,0,0,1,601,511 :fillbg 1 :brush 65535,0 :fgcolor "Black",0,0,0 :bgcolor "White",1,1,1 :font "-*-helvetica-medium-r-normal-*-12-*-*-*-*-*-*-*","Helvetica",12 :graypat 1),
+        pipe( :reqlabel 1 :ellipse 564,362,35,20 :ellipsetrans 1,0,0,1,41.5,39 :text 12,"E" :texttrans 1,0,0,1,602,394 :fillbg 1 :brush 65535,0 :fgcolor "Black",0,0,0 :bgcolor "White",1,1,1 :font "-*-helvetica-medium-r-normal-*-12-*-*-*-*-*-*-*","Helvetica",12 :graypat 1),
+        mutex( :reqlabel 1 :ellipse 232,441,35,20 :ellipsetrans 1,0,0,1,101.5,22 :text 12,"M1" :texttrans 1,0,0,1,325,456 :fillbg 1 :brush 65535,0 :fgcolor "Black",0,0,0 :bgcolor "White",1,1,1 :font "-*-helvetica-medium-r-normal-*-12-*-*-*-*-*-*-*","Helvetica",12 :graypat 1),
+        conn(237,503,305,475 :arrowscale 1.5 :tail :startnode 0 :endnode 5 :fillbg 1 :brush 65535,0 :fgcolor "Black",0,0,0 :bgcolor "White",1,1,1 :graypat 0),
+        conn(234,416,306,450 :arrowscale 1.5 :tail :startnode 1 :endnode 5 :fillbg 1 :brush 65535,0 :fgcolor "Black",0,0,0 :bgcolor "White",1,1,1 :graypat 0),
+        conn(369,463,428,463 :arrowscale 1.5 :tail :startnode 5 :endnode 2 :fillbg 1 :brush 65535,0 :fgcolor "Black",0,0,0 :bgcolor "White",1,1,1 :graypat 0),
+        conn(493,474,576,507 :arrowscale 1.5 :tail :startnode 2 :endnode 3 :fillbg 1 :brush 65535,0 :fgcolor "Black",0,0,0 :bgcolor "White",1,1,1 :graypat 0),
+        conn(492,451,577,414 :arrowscale 1.5 :tail :startnode 2 :endnode 4 :fillbg 1 :brush 65535,0 :fgcolor "Black",0,0,0 :bgcolor "White",1,1,1 :graypat 0),
+        text(14,"D<$C>" :fillbg 0 :fgcolor "Black",0,0,0 :font "-*-helvetica-bold-r-normal-*-14-*-*-*-*-*-*-*","Helvetica-Bold",14 :transform 1,0,0,1,425,352),
+        text(14,"E<$C>" :fillbg 0 :fgcolor "Black",0,0,0 :font "-*-helvetica-bold-r-normal-*-14-*-*-*-*-*-*-*","Helvetica-Bold",14 :transform 1,0,0,1,564,352),
+        arrowspline((205,317),(203,325),(191,329),(174,326),(144,321),(100,322),(81,325),(31,381),(37,428),(79,499),
+            (161,517),(210,517),(300,514),(380,482),(420,465),(434,435),(423,395),(379,378),(289,372),(246,352),
+            (234,341),(217,339),(210,329),(205,317) :fillbg 1 :brush 65520,2 :fgcolor "Red",1,0,0 :bgcolor "White",1,1,1 :nonepat :transform 1,-0,-0,1,81,44),
+        arrowspline((367,315),(371,328),(370,353),(341,377),(331,393),(321,425),(336,453),(368,478),(427,508),(468,516),
+            (527,524),(556,517),(569,496),(569,460),(559,439),(516,420),(448,402),(430,389),(413,373),(391,355),
+            (381,344),(370,324),(368,312) :fillbg 1 :brush 65520,2 :fgcolor "Blue",0,0,1 :bgcolor "White",1,1,1 :nonepat :transform 1,-0,-0,1,81,44),
+        arrowspline((503,315),(497,324),(466,338),(434,340),(403,349),(381,360),(358,374),(338,395),(327,419),(338,443),
+            (370,456),(417,455),(453,438),(481,428),(547,402),(567,392),(579,369),(578,351),(554,333),(531,331),
+            (517,330),(509,329),(506,322),(505,314) :fillbg 1 :brush 65520,2 :fgcolor "Green",0,1,0 :bgcolor "White",1,1,1 :nonepat :transform 1,-0,-0,1,81,44),
+        text(14,"C<{{$A $B}}>" :fillbg 0 :fgcolor "Black",0,0,0 :font "-*-helvetica-bold-r-normal-*-14-*-*-*-*-*-*-*","Helvetica-Bold",14 :transform 1,0,0,1,262,352)
+        )
+)

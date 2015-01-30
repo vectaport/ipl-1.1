@@ -1,0 +1,138 @@
+Drawing Flowgraphs
+
+Use the named (L) or unnamed (N) pipeline tool to draw a segment (or
+node) of logically determined pipeline.  Named pipeline nodes can be
+manipulated in the built-in command interpreter when the drawing is
+saved and reloaded.
+
+Use the invo drawing tool (I) to draw invocation primitives.  Enter
+the primitive name followed by the respective nsrc and ndst values
+listed below.  Connect this new invocation to other pipeline nodes or
+invocations using the edge tool (E).
+
+When an edge does not end (or begin) on a pipeline node or invocation
+a fork object (a dot) is automatically inserted.  A fork is simply a
+connector for continuing, and branching an edge.
+
+To rectify edges (and forks) to right angles, use the Align/"Square
+Wires" command.
+
+Us the mutex tool (M) to coordinate fan-in of edges.  It draws a
+pipeline node that accepts two inputs.
+
+Commands For Running Flowgraphs
+
+srcput(src val) -- put a value into the source end of a pipeline
+val=dstget(dst) -- get a value from the destination end of a pipeline
+flag=singlestep([flag]) -- set/get the singlestep flag
+    (0=disable, 1=enable, 2=animate only)
+flag=eventqueue([flag] :size :dump) -- set/get the event queue flag
+    (0=disable, 1=enable, 2=paused)
+stat=tick() -- run all events in queue
+
+
+
+
+
+**** C operators *****
+primitive	nsrc	ndst	description			C equivalent
+---------       ----    ----    -----------                     ------------
+negate		1 	1	negate operator 		!x
+bit_not         1       1       bitwise-not operator		~x
+sub		2	1	subtraction operator	 	x-y
+minus		1	1	unary minus operator		-x
+mod		2	1	mod operator			x%y
+mpy		2	1	multiply operator		x*y
+div		2	1	divide operator			x/y
+add		2	1	add operator			x+y
+lshift		2	1	left shift operator		x<<y
+rshift		2	1	right shift operator		x>>y
+lt		2	1	less-than operator		x<y
+lt_or_eq	2	1	less-than-or-equal operator	x<=y
+gt		2	1	greater-than operator		x>y
+gt_or_eq	2	1	greater-than-or-equal operator	x>=y
+not_eq		2	1	not-equal operator    		x!=y
+eq		2	1	equal operator			x==y
+bit_and		2	1	bitwise-and operator		x&y
+bit_xor		2	1	bitwise-xor operator		x^y
+bit_or		2	1	bitwise-or operator		x|y
+and		2	1	boolean and operator		x&&y
+or		2	1	boolean or operator		x||y
+
+**** specialized invocation primitives ****
+primitive	nsrc	ndst	description					inputs			outputs
+---------       ----    ----    -----------                     		------			-------
+ACK		n	1	generate acknowledge once all values present	val0[,val1[,...,valn]]	ack
+ADD1		1	1	increment by one     	      	     		num			num
+ARBFLAG		1,1	1	return order of arrival				val,nil|nil,val		flag
+ARBITER		1,1	1	return values in order of arrival		val,nil|nil,val		val
+COND		3	1	return first or second value based on flag	flag,val0,val1		val
+EITHER		1,1	1	return either value    	     	      		val,nil|nil,val		val
+EQ0		1	1	return true if equal to zero			val			flag
+EVEN		1	1	return true if even  				val			flag
+FALSE		1	1	return 0      					val			false
+GT		2	2	sort two values, greatest first	      		val0,val1		sorted0,sorted1
+GT0		1	1	return true if greater than zero		val			flag
+INVERT		1	1	return 1/val	 	  			val			1/val
+JOIN		n	1	join 2 or more values into tuple		val0,val1[,...,valn]    tuple
+LSB		1	2	return lsb and left-shift by one		num			num,num
+LSH1		1	1	left-shift by one     	   			num			num
+LT		2	2	sort two values, lesser first	      		val0,val1		sorted0,sorted1
+LT0		1	1	return true if less than zero			val			flag
+MEAN		n	1	return mean of all inputs			val0,..,valn		mean
+MERGE           n,..,n  n	tuple mutex	 	                        tuple|..|tuple          tuple
+ODD		1	1	return true if odd  				val			flag
+ONE		1	1	return 1					val			1
+PASS		1	1	do nothing, pass value on			val			val
+PASS2           2       2	do nothing on two values, and pass both on	val,val			val,val
+RDY		2	1	pass value once acknowledge received		val,ack			val
+RSH1		1	1	right shift by one	    			num			num
+SINK		n	0	gobble up arguments and return nothing		val0[,val1[,...,valn]	
+SPLIT		1	n	split a tuple apart 	       			tuple			val0[,val1[,...,valn]	
+STEER		n	n,n	steer n+1 arguments by removed lsb of nth arg   val0[,val1[,...,valn]	val0[,blank[,...,blank]|blank[,blank[,...,valn]
+STEERJ		n	1,1	strip first arg lsb to steer rest into list     val0[,val1[,...,valn]	val1[,..[,valn]],blank|blank,val1[,..[,valn]]
+STEER0		n	1,..,1	unconditionally steer toward the zeroth output	val			val,blank[,blank[,..blank]]
+STRCND		1	1,..,1  steer a condition to the nth output   	  	flag			flag0,blank[,...,blank]|blank,flag1[,...,blank]|...
+STRVAL		2	1,..,1	steer 2nd argument by the first argument	flag,val		val,blank[,...,blank]|blank,val[,...,blank]|...
+SUB		2	2	subtract and return value plus negative flag	num0,num1		result,flag
+TEE		1	2	fan-out	     	    	       			val			val,val
+THREE		1	1	return 3					val			3
+TRUE		1	1	return 1					val			true
+TWO		1	1	return 2					val			2
+ZERO		1	1	return 0					val			0
+
+**** miscellaneous primitives ****
+primitive	nsrc	ndst	description					inputs			outputs
+---------       ----    ----    -----------                     		------			-------
+abs		1	1	absolute value					num			num
+acos		1	1	arc cosine of x in radians			num			dbl
+asin		1	1	arc sine of x in radians			num			dbl
+atan		1	1 	arc tangent of x in radians			num			dbl
+atan2		2	1	arc tangent of y over x				ynum,xnum		dbl
+ceil		1	1	ceiling function      				num			int
+char		1	1	char conversion					num			char
+ctoi		1	1	convert numeric char to int			char			int
+cos		1	1	cosine of x radians				num			dbl
+degtorad	1	1	convert radians to degrees			num			dbl
+double		1	1	convert any numeric to a double			num			dbl
+exp 		1	1	e raised to the power  	 			num			dbl
+float		1	1	convert any numeric to a float			num			flt
+floor		1	1	floor function	       	 			num			int
+int		1	1	convert any numeric to an int			num			int
+isspace		1	1	return true if whitespace			char			bool
+log		1	1	natural logarithm      	  			num			dbl
+log10		1	1	base-10 logarithm				num			dbl
+long		1	1	convert any numeric to a long			num			long
+max		2	1	maximum function       	 			num,num			num
+mean		1	1	mean of tuple					tuple			num
+min		2	1       minimum function				num,num			num
+radtodeg	1	1	convert radians to degrees			num			dbl
+rand		1	1       generate random number between minval,maxval    pair (min,max)		dbl
+round		1	1	round to closest integer value 			num  			dbl
+short		1	1	convert any numeric to a short			num			short
+sqrt		1	1	square root 	       	 			num			dbl
+stddev		1	1	standard deviation				tuple			dbl
+sum		1	1	sum of values					tuple			dbl
+tan		1	1	tangent of radians				num			dbl
+var		1	1	variance of values				tuple			dbl
+

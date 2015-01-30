@@ -1,0 +1,32 @@
+NAME
+     iplserv - Ipl Server
+
+SYNOPSIS
+     iplserv [-p port] [scriptfile(s)]
+
+DESCRIPTION
+
+iplserv is an extension of comterp with support for IPL
+
+COMMANDS
+
+ipl() 				switches to ipl syntax
+flag=anglebrackets([flag]) 	sets/gets angle brackets flag
+
+obj=pipe([buffsize])		creates a pipe object
+obj=invo(func)			creates an invocation object
+obj=mutex()			creates a mutex object
+obj=conn(dest src)		creates a connection object
+obj=mconn(dest1 dest2 src [mutex])	create/connect up a mutex object
+
+max=buffsize(pipe [max])	set/get maximum size of pipe's buffer
+obj=buff(pipe)			return buffer associated with a pipeline
+bool=srcrdy(src)	   	check if source end of a pipeline is ready
+bool=dstrdy(dst)		check if destination end of a pipeline is ready
+srcput(src val)			put a value into the source end of a pipeline
+val=dstget(dst)			get a value from the destination end of a pipeline
+
+
+SEE ALSO  
+	comterp
+

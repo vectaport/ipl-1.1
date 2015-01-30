@@ -1,0 +1,52 @@
+		       README for ipl-1.1
+
+Read the INSTALL file for instructions on how to build this release
+from source.  This software builds on top of ivtools, a C++ toolkit
+maintained and distributed by myself as well.
+
+ipl stands for the Invocation (Programming) Language, a concurrent
+programming language described in Chapter 12 of Karl M. Fant's book
+"Computer Science Reconsidered: The Invocation Model of Process
+Expression" (Wiley-Interscience, 2007).  Copies of this book may well
+be available in an academic library near you.
+
+This software package consists of a C++ class hierarchy for
+representing language internals (IplServ), a parser/interpreter for
+experimenting with these constructs (iplserv), and a graphical editor
+for creating and testing drawings of programs (ipledit).
+
+The examples directory contains sample program drawings (.ipd files).
+See the README in that directory for further details.  In this
+directory, HOW-TO is a file that enumerates all the primitive
+functions available to an Invocation Language programmer, and starts
+to explain how to use ipledit to compose programs.
+
+The Invocation Language, along with Null-Convention Logic (also
+invented by Karl Fant -- see his first book "Logically Determined
+Design: Clockless System Design with NULL Convention Logic" --
+Wiley-Interscience, 2005) represents a fundamentally new and different
+way of creating and programming computers, derived from a theory that
+re-lays the foundations of computer science, expanding it to encompass
+physical and biological processes as well as those of human design.
+
+This software is a work in progress, an active test-bed for the ideas
+embedded in Karl's books.  At the same time it is the pinnacle of
+almost 20 years of work on a singular X11 toolkit developed at
+Stanford in the late 1980's.  In the interest of facilitating academic
+investigation into Karl's ideas, I am making this software available
+under the terms of the GPL Version 2.0 (ivtools remains under an
+MIT-style non-copylefted free software license).  Contact me for
+information about commercial licensing.
+
+I welcome any and all queries about this technology.  I will strive to
+improve this distribution over time, and to clarify its use with
+improved documentation and examples.  In some sense this is the
+software that should have been on a CD that came with the book.  It
+can be quite entertaining and illuminating to use this software to
+bring the concepts in Karl's books alive.
+
+Scott Johnston
+March 2008
+info@vectaport.com
+
+

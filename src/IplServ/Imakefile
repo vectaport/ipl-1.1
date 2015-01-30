@@ -1,0 +1,39 @@
+XCOMM
+XCOMM source files for building the IplServ library
+XCOMM
+
+PACKAGE = IplServ
+
+#ifdef InObjectCodeDir
+
+LIB = IplServ
+CCSUFFIX = c
+
+OTHER_CCDEFINES = $(ACE_CCDEFINES)
+OTHER_CCINCLUDES = $(ACE_CCINCLUDES)
+
+XCOMM Use_2_6()
+
+MakeLibrary($(LIB),$(VERSION))
+
+#define Obj(file) MakeObjectFromSrcFlags(file,)
+#define ObjA(file) MakeObjectFromSrcFlags(file, -D__ACE_INLINE__)
+
+Obj(delimfunc)
+Obj(eventqueue)
+Obj(invofunc)
+Obj(iplfunc)
+Obj(iplcomps)
+ObjA(iplhandler)
+Obj(iplscripts)
+Obj(langfunc)
+Obj(spritequeue)
+
+IncludeDependencies()
+
+#else
+
+MakeInObjectCodeDir()
+InstallIncludes($(PACKAGE))
+
+#endif

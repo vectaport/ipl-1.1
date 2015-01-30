@@ -1,0 +1,24 @@
+
+The utils directory contains utility/test programs for VPF and DEM datafiles.
+
+vpftableprint prints the contents of any VPF table.  Its one argument is a
+table pathname.  For example:
+
+	vpftableprint/$CPU/a.out /cdrom/dcw/browse/po/txt.
+
+vfpdbprint prints the contents of a VPF database.  Its one argument is a
+database pathname.  For example:
+
+	vpfdbprint/$CPU/a.out /cdrom/dcw
+
+dcwdemprint and usgsdemprint print out the contents of DCW DEM and
+USGS 1 degree and 7.5 minute DEM files.  Their one argument is an
+appropriate DEM file pathname.
+
+usgsdem2vtk converts a USGS 1 degree DEM into a format importable by demviewer
+while performing tiling and decimation to reduce data size.  Its arguments
+are the DEM file pathname and the pathname of a directory where the tiled
+files will be created (directory must exist before running.)  For example:
+
+	usgsdem2vtk/$CPU/a.out san_francisco_e.dem.gz /data/sfe
+

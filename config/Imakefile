@@ -1,0 +1,9 @@
+XCOMM
+XCOMM config files for building vhclmaps libraries and applications
+XCOMM
+
+PACKAGE = config_ipl
+
+SUBDIRS = InterViews
+
+MakeInSubdirs($(SUBDIRS))

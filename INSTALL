@@ -1,0 +1,145 @@
+
+			INSTALL for ipl-1.1
+
+Instructions for building ipl-1.0 from source:
+
+0. Compilation Environment
+
+Tools you will need before you can build:
+
+0.a. a Unix machine.  It should build on most any Unix machine with
+some config changes.
+
+0.b. The gcc compiler.  Recently I've been building and testing with gcc-4.0
+
+0.c. An installed copy of X11R6 as distributed by the Open Group, or
+an equivalent (XFree86 for Linux, or X11R5 from MIT).  If you use a
+vendor's X11 product, the product should be based on X11R4 or later
+and the product should include imake and the config files.
+
+If imake is not in the same place as the other X11 binaries are or
+anywhere else on your system, you can get the sources for imake from
+the X11R5 or X11R6 distribution at several public ftp archives (such
+as ftp.x.org).  Check to see which cpp will get used by imake with
+"which cpp".  You may have problems with other than a gcc C
+preprocessor.
+
+0.d. You need to obtain, build, and install ivtools-1.2.5 or greater (from
+http://www.ivtools.org/ivtools/) according to its INSTALL
+instructions before you can build ipl-1.0.  You can build ivtools
+with or without --enable-install-relative supplied to its configure
+script. Tips on building ACE for use of ipl and ivtools can be found in 
+the ivtools INSTALL file.
+
+1. Configuring ipl:
+
+1.a. Ready-made configurations exist for DARWIN, LINUX, SUN4 (and
+Solaris), and SGI.
+
+Use "make CPU" from the top directory to see the symbol ipl will
+use for your OS (grep config/arch.def for ArchitectureName to get a
+complete list of possible OS'es). Then look for a matching
+config/site.def.<CPU> file, where <CPU> is the value returned by "make
+CPU".  If it is there proceed to step 1.b.
+
+Other variants of Unix can be attempted by creating the corresponding
+config/site.def.<CPU>, i.e. site.def.AIX or site.def.MIPS.
+
+Use SUN4 for Solaris as well as SunOS.  Although SUN5 would be more
+correct, the config files automatically determine the difference
+between the two OS'es by checking for SVR4'ness.
+
+1.b Run the configure script in the top-level directory, by entering
+"./configure" followed by any of the following arguments:
+
+  --x-includes=DIR        X include files are in DIR
+  --x-libraries=DIR       X library files are in DIR
+
+
+  --enable-install-relative[=ARG]  install relative to source tree
+  --enable-install-subdir[=ARG]    install in ipl sub-directory
+  --prefix=DIR			   to use when install-relative is false
+				   (default is /usr/local)
+
+  --enable-use-rpath[=ARG]        use -rpath when linking, to
+				  embed shared-library pathnames
+				  in executable. 
+
+--enable and --with options recognized:
+  --with-ace=<path>                Path to ACE includes
+  --with-ace-libs=<path>           Path to ACE libraries
+  --with-ivtools=<path>            Path to ivtools includes
+  --with-ivtools-libs=<path>       Path to ivtools libraries
+
+If the arguments for ACE or ivtools are not supplied, the
+configure script prints a reminder, then proceeds to set up to build
+ipl without these libraries.  The configure script is usually
+able to automatically determine --x-includes and --x-libraries (except
+on Dec Alpha for some reason).  (=0 or =1 can be substituted for
+=ARG. Default is =1 when not specified.)
+
+If you want to run the executables without installing them, use
+--enable-use-rpath to embed the shared library pathnames into the
+executables at link time.
+
+Here is an example of using the configure script with ACE and ivtools libraries (ivtools is required):
+
+./configure --with-ace=/proj/ACE_wrappers --with-ivtools=/usr/local/ivtools
+
+Running the configure script generates two files, a config/config.mk
+that gets included into each Makefile when used, and a
+config/config-<os>-gcc.defs that gets used by "make Makefiles"
+described below.  <os> is something like linux.The last line of output
+from the configure script shows this pathname.  Verify that this is
+the same as the file included at the end of the config/site.def.<CPU>
+file.  Change the site.def.<CPU> file if necessary.
+
+Also you may want to review the rest of the entries in the
+site.def.<CPU> file to see if they are good defaults for your system.
+
+2. Compiling ipl:
+
+2.a. cd to the ipl-1.0/ directory (you'd already be in this
+directory after running the configure script).
+
+2.b. Compile it with a "make" command.  This command:
+
+	- regenerates the top-level Makefile to snap it to 
+	  the current directory ("make Makefile").
+
+	- runs through the source tree and generates all 
+	  the other Makefile's ("make Makefiles").
+
+	- generates compilation dependencies for each 
+	  directory with code to compile -- see the
+	  Makefile.depend file in each <CPU> sub-directory
+	  ("make depend").
+
+	- compiles and links everything ("make -k").
+	
+If you have any trouble at this stage you might want to look at:
+
+  http://www.ivtools.org/ivtools/faq.html#SourceBuild
+
+3. Testing:
+
+Each directory under ipl-1.0/src that begins in lower case (except
+for "scripts") contains executables for each particular viewer in
+$CPU/a.out.  "cd" to each particular directory and read the README files
+that go into further detail on how to use the viewers. 
+
+4. Installation:
+
+"make install" is supported for all the libraries, and executables. "make uninstall"
+is supported as well.
+
+When relative install is enabled (--enable-install-relative for the
+configure script), the binaries are installed in
+ipl-1.0/bin/<CPU>, the libraries are installed in
+ipl-1.0/lib/<CPU>, and the run-time X resource and config files
+are installed in ipl-1.0/lib/ipl.
+
+When relative install is disabled (the default for the configure
+script) the binaries are installed as stripped executables in `prefix`/bin
+the libraries are installed in `prefix`/lib, and the run-time X resource and
+config files are installed in `prefix`/lib/ipl.

@@ -1,0 +1,66 @@
+XCOMM
+XCOMM ipleditor - ipl editor
+XCOMM
+
+PACKAGE = ipledit
+
+#ifdef InObjectCodeDir
+
+APP_CCLDLIBS = \
+$(LIBIPLEDIT) \
+$(LIBIPLSERV) \
+$(LIBDRAWSERV) \
+$(LIBFRAMEUNIDRAW) \
+$(LIBGRAPHUNIDRAW) \
+$(LIBCOMUNIDRAW) \
+$(LIBACEDISPATCH) \
+$(LIBOVERLAYUNIDRAW) \
+$(LIBTOPOFACE) \
+$(LIBCOMGLYPH) \
+$(LIBCOMTERP) \
+$(LIBATTRGLYPH) \
+$(LIBATTRIBUTE) \
+$(LIBCOMUTIL) \
+$(LIBUNIIDRAW) \
+$(LIBIVGLYPH)
+
+#if HasDynamicSharedLibraries
+APP_CCDEPLIBS = \
+$(DEPIPLEDIT) \
+$(DEPIPLSERV) \
+$(DEPDRAWSERV) \
+$(DEPGRAPHUNIDRAW) \
+$(DEPFRAMEUNIDRAW) \
+$(DEPCOMUNIDRAW) \
+$(DEPACEDISPATCH) \
+$(DEPOVERLAYUNIDRAW) \
+$(DEPTOPOFACE) \
+$(DEPCOMGLYPH) \
+$(DEPCOMTERP) \
+$(DEPATTRGLYPH) \
+$(DEPATTRIBUTE) \
+$(DEPCOMUTIL) \
+$(DEPUNIIDRAW) \
+$(DEPIVGLYPH)
+#endif
+
+OTHER_CCDEFINES = $(ACE_CCDEFINES)
+OTHER_CCINCLUDES = $(ACE_CCINCLUDES)
+OTHER_CCLDLIBS = $(CLIPPOLY_CCLDLIBS) $(ACE_CCLDLIBS)
+
+Use_libUnidraw()
+Use_2_6()
+
+ComplexProgramTarget(ipledit)
+
+#define Obj(file) MakeObjectFromSrcFlags(file, -D__ACE_INLINE__)
+
+Obj(main)
+
+IncludeDependencies()
+
+#else
+
+MakeInObjectCodeDir()
+
+#endif

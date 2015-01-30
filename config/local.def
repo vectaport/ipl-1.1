@@ -1,0 +1,260 @@
+XCOMM -------------------------------------------------------------------------
+XCOMM from <local.def>:
+
+/*
+ * ivtools versioning now handled automatically
+ */
+#include IvToolsVersionInclude
+
+/*********************************************************/
+/* start of things you might want to change in this file */
+
+/*
+ * What you need to turn on debugging
+ */
+#undef TurnOnDebugging
+#define TurnOnDebugging YES
+
+/*
+ * What you need to turn on optimizing
+ */
+#undef TurnOnOptimizing
+#define TurnOnOptimizing YES
+
+/*
+ * To disable removal of programs if a "make install" is done"
+ */
+#undef RemoveAfterInstall
+#define RemoveAfterInstall NO
+
+/* end of things you might want to change in this file */
+/*******************************************************/
+
+/*
+ * Assume the use of gcc-2.3.3 or greater
+ */
+#undef LanguageCCDefines
+#define LanguageCCDefines -Dcplusplus_2_1 -Wno-deprecated
+#include <gcc.def>
+
+/* 
+ * Where to look for config files.
+ */
+#undef ImakeIncludes
+#define ImakeIncludes -I$(TOP)/config -I$(CONFIGSRC) -I$(XCONFIGDIR)
+
+/* 
+ * Make variables for building local to these packages.
+ * APP_CCINCLUDES can be overridden in the Imakefile
+ * APP_CCLDLIBS is defined in the Imakefile.
+ */
+    NORM_CCINCLUDES = -I$(CURRENT_DIR)/.. -I$(CURRENT_DIR)/../.. -I$(TOP)/src -I$(TOP)/src/include \
+-I$(IVTOOLSSRC) $(BACKWARD_CCINCLUDES) -I$(IVTOOLSSRC)/include \
+-I$(IVTOOLSSRC)/include/ivstd $(X_CCINCLUDES)
+     APP_CCINCLUDES = $(NORM_CCINCLUDES)
+#if !HasDynamicSharedLibraries
+     APP_CCDEPLIBS = $(APP_CCLDLIBS)
+#endif
+
+/* 
+ * Equate SrcRoot to IvToolsSrcRoot
+ */
+#undef SrcRoot
+#define SrcRoot IvToolsSrcRoot
+
+/*
+ * Location of ivtools libraries
+ */
+
+/*
+ * defines libvar and depvar macros
+ */
+#ifdef IvtoolsUseInstalled
+	IVTOOLSLIBDIR = IvToolsSrcRoot/lib
+#define UseInstalled
+#include <makevars.def>
+#undef IvtoolsUseInstalled
+#else
+	IVTOOLSLIBDIR = IvToolsSrcRoot
+#include <makevars.def>
+#endif
+
+        IVTOOLSSRC = IvToolsSrcRoot
+   IVTOOLS_VERSION = IvtoolsVersion
+
+
+/* 
+ * Macros for defining makefile variables for library linking
+ */
+libvar(LIBUNIDRAWCOMMON,IVTOOLSLIBDIR,Unidraw-common,libUnidraw-common,-lUnidraw-common)
+libvar(LIBIVCOMMON,IVTOOLSLIBDIR,IV-common,libIV-common,-lIV-common)
+libvar(LIBTIME,IVTOOLSLIBDIR,Time,libTime,-lTime)
+libvar(LIBATTRIBUTE,IVTOOLSLIBDIR,Attribute,libAttribute,-lAttribute)
+libvar(LIBCOMUTIL,IVTOOLSLIBDIR,ComUtil,libComUtil,-lComUtil)
+libvar(LIBCOMTERP,IVTOOLSLIBDIR,ComTerp,libComTerp,-lComTerp)
+libvar(LIBIVGLYPH,IVTOOLSLIBDIR,IVGlyph,libIVGlyph,-lIVGlyph)
+libvar(LIBATTRGLYPH,IVTOOLSLIBDIR,AttrGlyph,libAttrGlyph,-lAttrGlyph)
+libvar(LIBCOMGLYPH,IVTOOLSLIBDIR,ComGlyph,libComGlyph,-lComGlyph)
+libvar(LIBGLYPHTERP,IVTOOLSLIBDIR,GlyphTerp,libGlyphTerp,-lGlyphTerp)
+libvar(LIBUNIIDRAW,IVTOOLSLIBDIR,UniIdraw,libUniIdraw,-lUniIdraw)
+libvar(LIBTOPOFACE,IVTOOLSLIBDIR,TopoFace,libTopoFace,-lTopoFace)
+libvar(LIBOVERLAYUNIDRAW,IVTOOLSLIBDIR,OverlayUnidraw,libOverlayUnidraw,-lOverlayUnidraw)
+#ifdef IueDir
+libvar(LIBIUESERV,IVTOOLSLIBDIR,IueServ,libIueServ,-lIueServ)
+#endif
+#ifdef AceDir
+libvar(LIBACEDISPATCH,IVTOOLSLIBDIR,AceDispatch,libAceDispatch,-lAceDispatch)
+#else
+  LIBACEDISPATCH =
+#endif
+libvar(LIBCOMUNIDRAW,IVTOOLSLIBDIR,ComUnidraw,libComUnidraw,-lComUnidraw)
+libvar(LIBFRAMEUNIDRAW,IVTOOLSLIBDIR,FrameUnidraw,libFrameUnidraw,-lFrameUnidraw)
+libvar(LIBGRAPHUNIDRAW,IVTOOLSLIBDIR,GraphUnidraw,libGraphUnidraw,-lGraphUnidraw)
+libvar(LIBDRAWSERV,IVTOOLSLIBDIR,DrawServ,libDrawServ,-lDrawServ)
+
+/*
+ * Macros for defining library dependency make variables.
+ */
+depvar(DEPUNIDRAWCOMMON,IVTOOLSLIBDIR,Unidraw-common,libUnidraw-common,$(IVTOOLS_VERSION))
+depvar(DEPIVCOMMON,IVTOOLSLIBDIR,IV-common,libIV-common,$(IVTOOLS_VERSION))
+depvar(DEPTIME,IVTOOLSLIBDIR,Time,libTime,$(IVTOOLS_VERSION))
+depvar(DEPATTRIBUTE,IVTOOLSLIBDIR,Attribute,libAttribute,$(IVTOOLS_VERSION))
+depvar(DEPCOMUTIL,IVTOOLSLIBDIR,ComUtil,libComUtil,$(IVTOOLS_VERSION))
+depvar(DEPCOMTERP,IVTOOLSLIBDIR,ComTerp,libComTerp,$(IVTOOLS_VERSION))
+depvar(DEPIVGLYPH,IVTOOLSLIBDIR,IVGlyph,libIVGlyph,$(IVTOOLS_VERSION))
+depvar(DEPATTRGLYPH,IVTOOLSLIBDIR,AttrGlyph,libAttrGlyph,$(IVTOOLS_VERSION))
+depvar(DEPCOMGLYPH,IVTOOLSLIBDIR,ComGlyph,libComGlyph,$(IVTOOLS_VERSION))
+depvar(DEPGLYPHTERP,IVTOOLSLIBDIR,GlyphTerp,libGlyphTerp,$(IVTOOLS_VERSION))
+depvar(DEPUNIIDRAW,IVTOOLSLIBDIR,UniIdraw,libUniIdraw,$(IVTOOLS_VERSION))
+depvar(DEPTOPOFACE,IVTOOLSLIBDIR,TopoFace,libTopoFace,$(IVTOOLS_VERSION))
+depvar(DEPOVERLAYUNIDRAW,IVTOOLSLIBDIR,OverlayUnidraw,libOverlayUnidraw,$(IVTOOLS_VERSION))
+#ifdef IueDir
+depvar(DEPIUESERV,IVTOOLSLIBDIR,IueServ,libIueServ,$(IVTOOLS_VERSION))
+#endif
+#ifdef AceDir
+depvar(DEPACEDISPATCH,IVTOOLSLIBDIR,AceDispatch,libAceDispatch,$(IVTOOLS_VERSION))
+#else
+    DEPACEDISPATCH =
+#endif
+depvar(DEPCOMUNIDRAW,IVTOOLSLIBDIR,ComUnidraw,libComUnidraw,$(IVTOOLS_VERSION))
+depvar(DEPFRAMEUNIDRAW,IVTOOLSLIBDIR,FrameUnidraw,libFrameUnidraw,$(IVTOOLS_VERSION))
+depvar(DEPGRAPHUNIDRAW,IVTOOLSLIBDIR,GraphUnidraw,libGraphUnidraw,$(IVTOOLS_VERSION))
+depvar(DEPDRAWSERV,IVTOOLSLIBDIR,DrawServ,libDrawServ,$(IVTOOLS_VERSION))
+
+/* local override of location of libUnidraw */
+#undef Ld_libUnidraw
+#if !UseRpath
+#if defined(UseInstalled)
+#define Ld_libUnidraw -L$(IVTOOLSSRC)/lib -lUnidraw
+#else
+#define Ld_libUnidraw -L$(IVTOOLSSRC)/Unidraw/$(CPU) -lUnidraw
+#endif
+#else
+#if defined(UseInstalled)
+#define Ld_libUnidraw -Wl,-rpath,$(IVTOOLSSRC)/lib -L$(IVTOOLSSRC)/lib -lUnidraw
+#else
+#define Ld_libUnidraw -Wl,-rpath,$(IVTOOLSSRC)/Unidraw/$(CPU) -L$(IVTOOLSSRC)/Unidraw/$(CPU) -lUnidraw
+#endif
+#endif
+#undef Dep_libUnidraw
+#if HasDynamicSharedLibraries
+#if defined(UseInstalled)
+#ifdef DarwinArchitecture
+#define Dep_libUnidraw $(IVTOOLSSRC)/lib/libUnidraw.$(IVTOOLS_VERSION).dylib
+#else
+#define Dep_libUnidraw $(IVTOOLSSRC)/lib/libUnidraw.SO.$(IVTOOLS_VERSION)
+#endif
+#else
+#ifdef DarwinArchitecture
+#define Dep_libUnidraw $(IVTOOLSSRC)/Unidraw/$(CPU)/libUnidraw.$(IVTOOLS_VERSION).dylib
+#else
+#define Dep_libUnidraw $(IVTOOLSSRC)/Unidraw/$(CPU)/libUnidraw.SO.$(IVTOOLS_VERSION)
+#endif
+#endif
+#else
+#if defined(UseInstalled)
+#define Dep_libUnidraw $(IVTOOLSSRC)/lib/libUnidraw.a
+#else
+#define Dep_libUnidraw $(IVTOOLSSRC)/Unidraw/$(CPU)/libUnidraw.a
+#endif
+#endif
+
+/* local override of location of libIV */
+#undef Ld_libIV
+#if !UseRpath
+#if !defined(UseInstalled)
+#define Ld_libIV -L$(IVTOOLSSRC)/IV/$(CPU) -lIV
+#else
+#define Ld_libIV -L$(IVTOOLSSRC)/lib -lIV
+#endif
+#else
+#if !defined(UseInstalled)
+#define Ld_libIV -Wl,-rpath,$(IVTOOLSSRC)/IV/$(CPU) -L$(IVTOOLSSRC)/IV/$(CPU) -lIV
+#else
+#define Ld_libIV -Wl,-rpath,$(IVTOOLSSRC)/lib -L$(IVTOOLSSRC)/lib -lIV
+#endif
+#endif
+#undef Dep_libIV
+#if HasDynamicSharedLibraries
+#if !defined(UseInstalled)
+#ifndef DarwinArchitecture
+#define Dep_libIV $(IVTOOLSSRC)/IV/$(CPU)/libIV.SO.$(IVTOOLS_VERSION)#
+#else
+#define Dep_libIV $(IVTOOLSSRC)/IV/$(CPU)/libIV.$(IVTOOLS_VERSION).dylib#
+#endif
+#else
+#ifndef DarwinArchitecture
+#define Dep_libIV $(IVTOOLSSRC)/lib/libIV.SO.$(IVTOOLS_VERSION)#
+#else
+#define Dep_libIV $(IVTOOLSSRC)/lib/libIV.$(IVTOOLS_VERSION).dylib#
+#endif
+#endif
+#else
+#if !defined(UseInstalled)
+#define Dep_libIV $(IVTOOLSSRC)/IV/$(CPU)/libIV.a
+#else
+#define Dep_libIV $(IVTOOLSSRC)/lib/libIV.a
+#endif
+#endif
+#undef UseInstalled
+
+/*
+ * Point to where ipl is installed on your system
+ * IplInstalledRoot applies if IplUseInstalled is defined.
+ * IplSrcRoot applies if IplUseInstalled is not defined.
+ */
+#undef IplSrcRoot
+#define IplSrcRoot $(TOP)
+
+/* 
+ * uncomment here to use installed ocpy of ipl 
+ * uncomment UseInstalled to change paths generated by macros in makevars.def
+ */
+/* #define UseInstalled  */
+#include <makevars.def>
+
+/*
+ * Location of Ipl and its libraries
+ */
+          IPLSRC = IplSrcRoot/src
+
+/* 
+ * Macros for defining makefile variables for library linking
+ */
+libvar(LIBIPL,IPLSRC,Ipl,libIpl,-lIpl)
+libvar(LIBIPLSERV,IPLSRC,IplServ,libIplServ,-lIplServ)
+libvar(LIBIPLEDIT,IPLSRC,IplEdit,libIplEdit,-lIplEdit)
+
+/*
+ * Macros for defining library dependency make variables.
+ */
+depvar(DEPIPL,IPLSRC,Ipl,libIpl,$(VERSION))
+depvar(DEPIPLSERV,IPLSRC,IplServ,libIplServ,$(VERSION))
+depvar(DEPIPLEDIT,IPLSRC,IplEdit,libIplEdit,$(VERSION))
+
+#undef UseInstalled
+
+/* substitute C compiler for makedepend */
+#define DependCmd CCDriver -M 
+
+XCOMM -------------------------------------------------------------------------

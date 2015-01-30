@@ -1,0 +1,138 @@
+************************************
+Instructions for running sample.ipd:
+
+1) open examples/sample.ipd in ipledit
+
+2) this shows source/destination pipes (nodes) and one mutex (M1)
+
+3) to put a value (of 100) into the source end of A, first select that
+node in the editor, then enter this command:
+
+   srcput(at(select) 100)
+
+4) now if you want to singlestep thru that behavior, reload the file,
+select the A node again, and type:
+
+   singlestep(1)
+   srcput(at(select) 100)
+
+then press C/R until the value fully propagates.
+
+5) now try putting more values into A and B until the network fills up.
+
+6) now try emptying values out of D and E, by selecting either one, and typing:
+
+   dstget(at(select))
+
+The language fragments and colored lines aren't functional, they just
+show how the language maps to the graphics.
+
+And there's no invocations or definitions in sight yet (in this
+example).  But in effect these pipe/nodes are the simplest kind of
+invocation with the simplest kind of completeness.
+
+**************************************
+Instructions for running exchsort.ipd:
+
+1) select the eight nodes on the left side then enter:
+
+   for(x=0 x<8 x++ srcput(at(select x) int(rand(0,100))))
+
+as many times as it takes to fill up
+
+2) use singlestep(1) to singlestep thru the animation, or
+singlestep(2) to see everything animated without pausing.
+
+3) select the eight nodes on the right side then enter:
+
+   for(x=0 x<8 x++ dstget(at(select x)))
+
+as many times at it takes to empty things out.
+
+- A similar technique works for exchsort16.ipd.
+
+- exchsorttester.ipd is exchsort.ipd with the addition of testing
+  circuitry to verify the sort worked.
+
+************************************
+Instructions for running cycles.ipd:
+
+1) select one of the 3 nodes in the upper-left of the drawing, and enter:
+
+   srcput(at(select) 1)
+
+to initialize a constant ring of value 1.
+
+2) select the node to the lower left of the "add" invocation and enter:
+
+   srcput(at(select) 1)
+
+to initialize an incrementing ring, and cause the output pipeline to fill up.
+
+***************************************
+Instructions for running fulladder.ipd:
+
+(this examples shows a full adder circuit with the addition of
+acknowledge/ready signals similar to NCL circuitry)
+
+1) initialize the ready signal by selecting the lower right node and entering:
+
+   srcput(at(select) 1)
+
+2) initalize the acknowledge signal by selecting the rightmost ACK
+invocation and entering:
+
+   srcput(at(getsrcpipes(at(select))) 1);srcput(at(getsrcpipes(at(select)) 1) 1)
+
+3) now plug in values to C, X, and Y to watch the result flow to SUM
+and CARRY and refresh the ACK signal.
+
+***********************************
+Instructions for running kgrid.ipd:
+
+Select the upper left node, then enter:
+
+       srcput(at(select) 1000)
+
+It's fun to use singlestep(2) on this one.
+
+***************************************
+Instructions for running mutextree.ipd:
+
+Carefully select all 256 input mutexes, then fill them up with something like this:
+
+    for(x=0 x<256 x++ srcput(at(select x) x))
+
+************************************
+Instructions for running rotmat.ipd:
+
+Left as an exercise for the reader.
+
+************************************
+Instructions for running iterator.ipd:
+
+Enter these commands into the bottom box:
+
+      srcput(init0 0)
+      srcput(MIN 0)
+      srcput(MAX 6)
+
+************************************
+Instructions for running lwarp.ipd:
+
+Launch "ipledit lwarp.ipd" then enter this command into the bottom box:
+
+       run("lwarp.init")
+
+This will initialize this linear warp program, and put it into singlestep mode.  Just continue to press Return to watch it run.  Enter:
+
+     singlestep(2)
+
+if you want to see it run continuously.
+
+
+
+
+
+
+
