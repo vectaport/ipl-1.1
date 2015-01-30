@@ -30,3 +30,13 @@ src/Makefile
 src/scripts/Makefile
 
 configure.orig
+
+src/ipledit_/DARWIN/Makefile
+
+*.depend
+
+src/IplEdit/DARWIN/Makefile
+
+src/iplserv_/DARWIN/Makefile
+
+src/IplServ/DARWIN/Makefile
