@@ -42,3 +42,23 @@ src/iplserv_/DARWIN/Makefile
 src/IplServ/DARWIN/Makefile
 
 Makefile
+
+make.make
+
+make.makefile
+
+make.makefiles
+
+*.o
+
+*.c~
+
+*.def~
+
+*.DARWIN~
+
+*.dylib
+
+src/ipledit_/DARWIN/a.out
+
+*.out

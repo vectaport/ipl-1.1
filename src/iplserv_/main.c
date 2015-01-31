@@ -121,22 +121,12 @@ int main(int argc, char *argv[]) {
 
     if (!telcat_flag) {
       
-#if __GNUC__<3
-      filebuf obuf;
-      obuf.attach(server.get_handle());
-#else
       FILE* ofptr = nil;
-      fileptr_filebuf obuf(ofptr = fdopen(server.get_handle(), "w"), ios_base::out);
-#endif
+      FILEBUF(obuf, ofptr = fdopen(server.get_handle(), "w"), ios_base::out);
       ostream out(&obuf);
       
-#if __GNUC__<3
-      filebuf ibuf;
-      ibuf.attach(server.get_handle());
-#else
       FILE* ifptr = nil;
-      fileptr_filebuf ibuf(ifptr = fdopen(server.get_handle(), "r"), ios_base::in);
-#endif
+      FILEBUF(ibuf, ifptr = fdopen(server.get_handle(), "r"), ios_base::in);
       
       istream in(&ibuf);
       
@@ -181,22 +171,12 @@ int main(int argc, char *argv[]) {
     } else if (inptr) {
 
 
-#if __GNUC__<3
-      filebuf inbuf;
-      inbuf.attach(fileno(inptr));
-#else
-      fileptr_filebuf inbuf(inptr, ios_base::in);
-#endif
+      FILEBUF(inbuf, inptr, ios_base::in);
       istream in(&inbuf);
       
 
-#if __GNUC__<3
-      filebuf obuf;
-      obuf.attach(server.get_handle());
-#else
       FILE* ofptr = nil;
-      fileptr_filebuf obuf(fdopen(server.get_handle(), "w"), ios_base::out);
-#endif
+      FILEBUF(obuf, fdopen(server.get_handle(), "w"), ios_base::out);
       ostream out(&obuf);
 
       char buffer[BUFSIZ*BUFSIZ];
@@ -206,9 +186,7 @@ int main(int argc, char *argv[]) {
 	  out.write(buffer, in.gcount());
       }
       out.flush();
-#if __GNUC__>=3
       if (ofptr) fclose(ofptr);
-#endif
     } else 
       cerr << "iplserv: unable to open file:  " << argv[4] << "\n";
 

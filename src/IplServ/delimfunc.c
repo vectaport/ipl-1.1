@@ -35,7 +35,7 @@ void ParensFunc::execute() {
   ComValue invov;
   if (onstackflag) invov = stack_arg(0);
   int num=nargs()-1-onstackflag;
-  ComValue insidevals[num];
+  ComValue *insidevals = new ComValue[num];
   for(int i=0; i<num; i++)   
     insidevals[i] = stack_arg(i+onstackflag);
   reset_stack();
@@ -130,7 +130,10 @@ void ParensFunc::execute() {
   }
   else {
     InvoComp* invocomp= (InvoComp*)invov.geta(InvoComp::class_symid());
-    if (!invocomp) return;
+    if (!invocomp) {
+      delete [] insidevals;
+      return;
+    }
 
     /* if _ndstsizes is already set, this isn't a fresh InvoComp (because of stream overdriving), and needs to be copied */
     if (invocomp->ndstsizes()!=0) {
@@ -240,6 +243,9 @@ void ParensFunc::execute() {
 
     }
   }
+
+  delete [] insidevals;
+  return;
 }
 
 /*****************************************************************************/
@@ -261,7 +267,7 @@ BracesFunc::BracesFunc(ComTerp* comterp) : ComFunc(comterp) {
 
 void BracesFunc::execute() {
   int num=nargs()-1;
-  ComValue insidevals[num];
+  ComValue*  insidevals = new ComValue[num];
   for(int i=0; i<num; i++)   
     insidevals[i] = stack_arg(i);
   ComValue nameval(stack_arg(num, true));
@@ -270,7 +276,10 @@ void BracesFunc::execute() {
   PipesComp* pipescomp = new PipesComp();
   ComValue retval(new OverlayViewRef(pipescomp), PipesComp::class_symid());
   push_stack(retval);
-  if (num==0) return;
+  if (num==0) {
+    delete insidevals;
+    return;
+  }
 
   boolean upstream_flag = insidevals[0].geta(ConnComp::class_symid()) != nil;
 
@@ -303,6 +312,9 @@ void BracesFunc::execute() {
     }
   }
   if(IplFunc::debug()) fprintf(stderr, "\n");
+
+  delete [] insidevals;
+  return;
   
 }
 

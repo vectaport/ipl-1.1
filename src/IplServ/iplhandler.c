@@ -12,10 +12,7 @@
 #ifdef HAVE_ACE
 #include <iostream.h>
 #include <fstream.h>
-#if __GNUC__==2 && __GNUC_MINOR__<=7
-#else
-#include <vector.h>
-#endif
+#include <vector>
 #endif
 
 #if defined(ARCH_READY)

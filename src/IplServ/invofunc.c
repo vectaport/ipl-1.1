@@ -22,6 +22,7 @@
 #include <ComTerp/boolfunc.h>
 #include <ComTerp/randfunc.h>
 #include <Attribute/attrlist.h>
+#include <Attribute/attrvalue.h>
 using std::cout;
 
 /*****************************************************************************/
@@ -382,9 +383,9 @@ InvoSteerValueFunc::InvoSteerValueFunc(ComTerp* comterp) : InvoFunc(comterp) {
 }
 
 void InvoSteerValueFunc::execute() {
-  int size = nargsfixed()-1;
+  const int size = nargsfixed()-1;
   ComValue steerv(stack_arg(0));
-  AttributeValue argsv[size];
+  AttributeValue* argsv = new AttributeValue[size];
   for (int i=0; i<size; i++)
     argsv[i] = stack_arg(i+1);
   reset_stack();
@@ -418,6 +419,7 @@ void InvoSteerValueFunc::execute() {
 
   ComValue retval(list);
   push_stack(retval);
+  delete [] argsv;
   return;
 }
 
@@ -661,9 +663,9 @@ SteerFunc::SteerFunc(ComTerp* comterp) : InvoFunc(comterp) {
 
 void SteerFunc::execute() {
   int size = nargsfixed();
-  AttributeValue argsv[size];
+  AttributeValue* argsv = new AttributeValue[size];
   for (int i=0; i<size; i++)
-    argsv[i] = stack_arg(i);
+    argsv[i] = stack_arg(i+1);
   reset_stack();
 
   AttributeValue* lastv = argsv+size-1;
@@ -686,6 +688,7 @@ void SteerFunc::execute() {
 
   ComValue retval(list);
   push_stack(retval);
+  delete [] argsv;
   return;
 }
 
@@ -696,9 +699,9 @@ SteerJoinFunc::SteerJoinFunc(ComTerp* comterp) : InvoFunc(comterp) {
 
 void SteerJoinFunc::execute() {
   int size = nargsfixed();
-  AttributeValue argsv[size];
+  AttributeValue* argsv = new AttributeValue[size];
   for (int i=0; i<size; i++)
-    argsv[i] = stack_arg(i);
+    argsv[i] = stack_arg(i+1);
   reset_stack();
 
   AttributeValue* lastv = argsv+size-1;
@@ -721,6 +724,7 @@ void SteerJoinFunc::execute() {
 
   ComValue retval(toplist);
   push_stack(retval);
+  delete [] argsv;
   return;
 }
 
@@ -823,9 +827,9 @@ InvoMeanFunc::InvoMeanFunc(ComTerp* comterp) : InvoFunc(comterp) {
 
 void InvoMeanFunc::execute() {
   int size = nargsfixed();
-  AttributeValue argsv[size];
+  AttributeValue* argsv = new AttributeValue[size];
   for (int i=0; i<size; i++)
-    argsv[i] = stack_arg(i);
+    argsv[i] = stack_arg(i+1);
   reset_stack();
 
   AddFunc addfunc(comterp());
@@ -840,7 +844,8 @@ void InvoMeanFunc::execute() {
   ComValue sizev(size, ComValue::IntType);
   push_stack(sizev);
   divfunc.exec(2, 0);
-  
+
+  delete [] argsv;
   return;
 }
 
