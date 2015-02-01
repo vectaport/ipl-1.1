@@ -1,10 +1,20 @@
 This software is dual-licensed, under the GPL Version 2 and a
-commercial license available from Theseus Research Inc.  All source
-code (except for those noted above) has the following copyright
-notice:
+commercial license that was originally sold to Theseus Research Inc.,
+and (AFAIK) resold to Wave Semiconductor Inc. in 2009.  This software
+distribution contains only the source code originally published under
+the GPL by myself in 2009 (before selling the dual license to Theseus
+Research Inc.), and subsequent changes done by me since leaving Wave
+Semiconductor in 2014.
+
+Scott Johnston
+January 2015
+
+
+All source code should have the following copyright notice:
 
 /*
- * Copyright 2005-2008 Theseus Research Inc., All Rights Reserved.
+ * Copyrivht 2015 Scott E. Johnston
+ * Copyright 2005-2008 Theseus Research Inc.
  * 
  * This file may be used under the terms of the GNU General Public
  * License version 2.0 as published by the Free Software Foundation                                

@@ -62,3 +62,9 @@ make.makefiles
 src/ipledit_/DARWIN/a.out
 
 *.out
+
+COPYRIGHT~
+
+INSTALL~
+
+src/utils/README~

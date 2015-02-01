@@ -1,7 +1,7 @@
 
 			INSTALL for ipl-1.1
 
-Instructions for building ipl-1.0 from source:
+Instructions for building ipl-1.1 from source:
 
 0. Compilation Environment
 
@@ -10,23 +10,22 @@ Tools you will need before you can build:
 0.a. a Unix machine.  It should build on most any Unix machine with
 some config changes.
 
-0.b. The gcc compiler.  Recently I've been building and testing with gcc-4.0
+0.b. The gcc or clang compiler.  Recently I've been building and
+testing with clang on OS X Mavericks.
 
 0.c. An installed copy of X11R6 as distributed by the Open Group, or
 an equivalent (XFree86 for Linux, or X11R5 from MIT).  If you use a
 vendor's X11 product, the product should be based on X11R4 or later
 and the product should include imake and the config files.
 
-If imake is not in the same place as the other X11 binaries are or
-anywhere else on your system, you can get the sources for imake from
-the X11R5 or X11R6 distribution at several public ftp archives (such
-as ftp.x.org).  Check to see which cpp will get used by imake with
-"which cpp".  You may have problems with other than a gcc C
-preprocessor.
+This build currently relies on the X11 imake utility, a tool that gets
+harder and harder to find with time.  To resolve source code for imake
+is incorporated into the ivtools source tree discussed below.  A
+complete build of ivtools installs a fixed up imake in /usr/local/bin.
 
-0.d. You need to obtain, build, and install ivtools-1.2.5 or greater (from
+0.d. You need to obtain, build, and install ivtools-1.2.11 or greater (from
 http://www.ivtools.org/ivtools/) according to its INSTALL
-instructions before you can build ipl-1.0.  You can build ivtools
+instructions before you can build ipl-1.1.  You can build ivtools
 with or without --enable-install-relative supplied to its configure
 script. Tips on building ACE for use of ipl and ivtools can be found in 
 the ivtools INSTALL file.
