@@ -295,7 +295,9 @@ int PipeEventQueue::nextevent() {
     PipeEvent* event = GetPipeEvent(it);
     Remove(it);
     delete event;
+    return 1;
   }
+  return 0;
 }
 
 int PipeEventQueue::mark_event(PipeEvent* event, int notifyflag) {

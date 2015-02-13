@@ -152,7 +152,7 @@ public:
       return "dst0|dst0,dst1[,dst2]}=func(src0 [src1 [src2]]) -- setup func with defcomp"; }
 
     IplIdrawComp* defcomp() { return _defcomp; }
-    void* defcomp(IplIdrawComp* comp) { _defcomp = comp; }
+    void defcomp(IplIdrawComp* comp) { _defcomp = comp; }
 protected:
     IplIdrawComp* _defcomp;
 };

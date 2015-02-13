@@ -437,7 +437,7 @@ void TranscribePipeFunc::execute() {
       cnt+=snprintf(buffer+cnt, BUFSIZ-cnt, "%s", 
 		    invocomp ? invocomp->funcname() : symbol_pntr(pipecomp->namesym()));
     else
-      cnt+=snprintf(buffer+cnt, BUFSIZ-cnt, "gen_%x", (unsigned long) pipecomp);
+      cnt+=snprintf(buffer+cnt, BUFSIZ-cnt, "gen_%lx", (unsigned long) pipecomp);
 
     boolean mutex_flag = 0;
     cnt+=snprintf(buffer+cnt, BUFSIZ-cnt, invocomp ? "(" : "<");
@@ -463,7 +463,7 @@ void TranscribePipeFunc::execute() {
 	    if (strlen(pname)>0) 
 	      cnt+=snprintf(buffer+cnt, BUFSIZ-cnt, "$%s", symbol_pntr(pcomp->namesym()));
 	    else
-	      cnt+=snprintf(buffer+cnt, BUFSIZ-cnt, "$gen_%x", (unsigned long) pcomp);
+	      cnt+=snprintf(buffer+cnt, BUFSIZ-cnt, "$gen_%lx", (unsigned long) pcomp);
 	  }
 #if 0
 	  // optional initial value

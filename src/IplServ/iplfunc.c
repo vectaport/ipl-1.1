@@ -13,9 +13,6 @@
 #include <Attribute/aliterator.h>
 #include <Attribute/attribute.h>
 #include <Attribute/attrlist.h>
-#if defined(ARCH_READY)
-#include <IplServ/archcomps.h>
-#endif
 #include <IplServ/eventqueue.h>
 #include <IplServ/iplfunc.h>
 #include <IplServ/iplhandler.h>
@@ -833,15 +830,8 @@ void DebugCompFunc::execute() {
 
     InvoComp* invocomp = (InvoComp*) invocompv.geta(InvoComp::class_symid());
     if (!invocomp) {
-#if defined(ARCH_READY)
-      invocomp = (InvoComp*) invocompv.geta(AluComp::class_symid());
-      if (!invocomp) {
-#endif
 	push_stack(ComValue::zeroval());
 	return;
-#if defined(ARCH_READY)
-      }
-#endif
     }
 
     _debug0_comp = invocomp;

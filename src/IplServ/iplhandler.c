@@ -15,9 +15,6 @@
 #include <vector>
 #endif
 
-#if defined(ARCH_READY)
-#include <IplServ/archfunc.h>
-#endif
 #include <IplServ/delimfunc.h>
 #include <IplServ/invofunc.h>
 #include <IplServ/iplhandler.h>
@@ -142,27 +139,5 @@ void IplservHandler::AddCommands(ComTerp* comterp) {
   comterp->add_command("STEERJ", new SteerJoinFunc(comterp));
   comterp->add_command("transcribe", new TranscribePipeFunc(comterp));
 
-#if defined(ARCH_READY)
-  comterp->add_command("MEM", new MemFunc(comterp));
-  comterp->add_command("ALUPASS", new AluPassFunc(comterp));
-  comterp->add_command("EITHER", new EitherFunc(comterp));
-  comterp->add_command("EITHER4", new EitherFunc(comterp));
-  comterp->add_command("ARBITER", new ArbiterFunc(comterp));
-  comterp->add_command("ARBIT4", new ArbiterFunc(comterp));
-  comterp->add_command("ARBFLAG", new ArbiterFlagFunc(comterp));
-  comterp->add_command("NXT", new NextFromPipeFunc(comterp));
-  comterp->add_command("TEE", new TeeFunc(comterp));
-
-  comterp->add_command("IAD", new IadFunc(comterp));
-  comterp->add_command("OAD", new OadFunc(comterp));
-  comterp->add_command("ALU", new AluFunc(comterp));
-
-  comterp->add_command("iadtable", new IadTableFunc(comterp));
-  comterp->add_command("oadtable", new OadTableFunc(comterp));
-  comterp->add_command("alutable", new AluTableFunc(comterp));
-  comterp->add_command("oadmem", new OadMemoryFunc(comterp));
-
-  comterp->add_command("instr", new RemoteInstructionFunc(comterp));
-#endif
 }
 

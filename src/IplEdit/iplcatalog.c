@@ -18,9 +18,6 @@
 #include <IplEdit/iplclasses.h>
 #include <IplEdit/iplcomps.h>
 #include <IplEdit/iplcreator.h>
-#if defined(ARCH_READY)
-#include <IplServ/archcomps.h>
-#endif
 #include <IplServ/iplcomps.h>
 #include <OverlayUnidraw/ovfile.h>
 #include <Unidraw/unidraw.h>
@@ -61,7 +58,7 @@ boolean IplCatalog::Retrieve (const char* name, Component*& comp) {
 	    char buf[len];
 
 	    char ch;
-	    while (isspace(ch = in.get())); in.putback(ch);
+	    while (isspace(ch = in.get())) {}; in.putback(ch);
 	    ParamList::parse_token(in, buf, len);
 	    if (strcmp(buf, "ipledit") == 0) { 
 	      comp = new IplIdrawComp(in, name);
@@ -128,32 +125,6 @@ OverlayComp* IplCatalog::ReadComp(const char* name, istream& in, OverlayComp* pa
      child = new DistantComp(in, parent);
      ((PipeComp*)child)->init_global();
      _nodes[_node_cnt] = (DistantComp*)child;
-     _node_cnt++;
-  }
-#endif
-  
-#if defined(ARCH_READY)
-  else if (strcmp(name, "alu") == 0) {
-     child = new AluComp(in, parent);
-     _nodes[_node_cnt] = (AluComp*)child;
-     _node_cnt++;
-  }
-  
-  else if (strcmp(name, "iad") == 0) {
-     child = new IadComp(in, parent);
-     _nodes[_node_cnt] = (IadComp*)child;
-     _node_cnt++;
-  }
-  
-  else if (strcmp(name, "oad") == 0) {
-     child = new OadComp(in, parent);
-     _nodes[_node_cnt] = (OadComp*)child;
-     _node_cnt++;
-  }
-
-  else if (strcmp(name, "mem") == 0) {
-     child = new MemComp(in, parent);
-     _nodes[_node_cnt] = (MemComp*)child;
      _node_cnt++;
   }
 #endif

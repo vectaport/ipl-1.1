@@ -19,9 +19,6 @@
 #include <IplEdit/iplkit.h>
 #include <IplEdit/iplcmds.h>
 #include <IplEdit/iplimport.h>
-#if defined(ARCH_READY)
-#include <IplServ/archcomps.h>
-#endif
 #include <IplServ/iplcomps.h>
 
 #include <DrawServ/drawcomps.h>
@@ -438,90 +435,6 @@ Glyph* IplKit::MakeToolbar() {
 					    protonode8),
 			layout.overlay(layout.hcenter(layout.hspace(maxwidth)),
 				       layout.hcenter(gnod8)), _tg, _ed->MouseDocObservable(), GraphKit::mouse_node));
-
-
-#if defined(ARCH_READY)
-    Catalog* catalog = unidraw->GetCatalog();
-    const char* mem = catalog->GetAttribute("mem");
-    int memflag = mem && (!strcmp(mem, "true") || !strcmp(mem, "TRUE"));
-    if (memflag) {
-
-    SF_Rect* nrect5 = new SF_Rect(0, 0, 64, 64, stdgraphic);
-    nrect5->SetPattern(psnonepat);
-    TextGraphic* ntext21 = new TextGraphic("", stdgraphic);
-    TextGraphic* ntext22 = new TextGraphic("", stdgraphic);
-    TextGraphic* ntext23 = new TextGraphic("", stdgraphic);
-    Picture* picture5 = new Picture(stdgraphic);
-    picture5->Append(nrect5, ntext21, ntext22, ntext23);
-    Picture* subpic12 = new Picture(stdgraphic);
-    Picture* subpic13 = new Picture(stdgraphic);
-    Picture* subpic14 = new Picture(stdgraphic);
-    picture5->Append(subpic12, subpic13, subpic14);
-    MemComp* protonode9 = new MemComp(picture5);
-    vb->append(MakeTool(new GraphicCompTool(new ControlInfo(protonode9, "",""),
-					    protonode9),
-			layout.overlay(layout.hcenter(layout.hspace(maxwidth)),
-				       layout.hcenter(gnod9)), _tg, _ed->MouseDocObservable(), GraphKit::mouse_lnode));
-    }
-#endif
-
-#if defined(ARCH_READY)
-    const char* arch = catalog->GetAttribute("arch");
-    int archflag = arch && (!strcmp(arch, "true") || !strcmp(arch, "TRUE"));
-    if (archflag) {
-
-    SF_Rect* nrect2 = new SF_Rect(0, 0, 64, 64, stdgraphic);
-    nrect2->SetPattern(psnonepat);
-    TextGraphic* ntext10 = new TextGraphic("", stdgraphic);
-    TextGraphic* ntext11 = new TextGraphic("", stdgraphic);
-    TextGraphic* ntext12 = new TextGraphic("", stdgraphic);
-    Picture* picture2 = new Picture(stdgraphic);
-    picture2->Append(nrect2, ntext10, ntext11, ntext12);
-    Picture* subpic3 = new Picture(stdgraphic);
-    Picture* subpic4 = new Picture(stdgraphic);
-    Picture* subpic5 = new Picture(stdgraphic);
-    picture2->Append(subpic3, subpic4, subpic5);
-    AluComp* protonode5 = new AluComp(picture2);
-    vb->append(MakeTool(new GraphicCompTool(new ControlInfo(protonode5, "A","A"),
-					    protonode5),
-			layout.overlay(layout.hcenter(layout.hspace(maxwidth)),
-				       layout.hcenter(gnod5)), _tg, _ed->MouseDocObservable(), GraphKit::mouse_lnode));
-
-    SF_Rect* nrect3 = new SF_Rect(0, 0, 64, 64, stdgraphic);
-    nrect3->SetPattern(psnonepat);
-    TextGraphic* ntext13 = new TextGraphic("", stdgraphic);
-    TextGraphic* ntext14 = new TextGraphic("", stdgraphic);
-    TextGraphic* ntext15 = new TextGraphic("", stdgraphic);
-    Picture* picture3 = new Picture(stdgraphic);
-    picture3->Append(nrect3, ntext13, ntext14, ntext15);
-    Picture* subpic6 = new Picture(stdgraphic);
-    Picture* subpic7 = new Picture(stdgraphic);
-    Picture* subpic8 = new Picture(stdgraphic);
-    picture3->Append(subpic6, subpic7, subpic8);
-    IadComp* protonode6 = new IadComp(picture3);
-    vb->append(MakeTool(new GraphicCompTool(new ControlInfo(protonode6, "",""),
-					    protonode6),
-			layout.overlay(layout.hcenter(layout.hspace(maxwidth)),
-				       layout.hcenter(gnod6)), _tg, _ed->MouseDocObservable(), GraphKit::mouse_lnode));
-
-    SF_Rect* nrect4 = new SF_Rect(0, 0, 64, 128, stdgraphic);
-    nrect4->SetPattern(psnonepat);
-    TextGraphic* ntext16 = new TextGraphic("", stdgraphic);
-    TextGraphic* ntext17 = new TextGraphic("", stdgraphic);
-    TextGraphic* ntext18 = new TextGraphic("", stdgraphic);
-    Picture* picture4 = new Picture(stdgraphic);
-    picture4->Append(nrect4, ntext16, ntext17, ntext18);
-    Picture* subpic9 = new Picture(stdgraphic);
-    Picture* subpic10 = new Picture(stdgraphic);
-    Picture* subpic11 = new Picture(stdgraphic);
-    picture4->Append(subpic9, subpic10, subpic11);
-    OadComp* protonode7 = new OadComp(picture4);
-    vb->append(MakeTool(new GraphicCompTool(new ControlInfo(protonode7, "",""),
-					    protonode7),
-			layout.overlay(layout.hcenter(layout.hspace(maxwidth)),
-				       layout.hcenter(gnod7)), _tg, _ed->MouseDocObservable(), GraphKit::mouse_lnode));
-    } /* done with if (archflag) */
-#endif
 
     _toolbars->append(vb);
 

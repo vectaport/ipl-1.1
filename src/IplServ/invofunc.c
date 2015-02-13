@@ -10,9 +10,6 @@
  *
  */
 
-#ifdef ARCH_READY
-#include <IplServ/archcomps.h>
-#endif
 #include <IplServ/eventqueue.h>
 #include <IplServ/invofunc.h>
 #include <IplServ/iplclasses.h>
@@ -340,9 +337,6 @@ void InvoSteerCondFunc::execute() {
       else
 	list->Append(new AttributeValue(ComValue::blankval()));
     }
-#ifdef ARCH_READY
-    if(context()->IsA(ALU_COMP)) ((AluComp*)context())->steermask(steerv.int_val() ? 0x6 : 0x3);
-#endif
     ComValue retval(list);
     push_stack(retval);
   } else 
@@ -370,9 +364,6 @@ void InvoSteer0Func::execute() {
     else
       list->Append(new AttributeValue(ComValue::blankval()));
   }
-#ifdef ARCH_READY
-  if(context()->IsA(ALU_COMP)) ((AluComp*)context())->steermask(0x3);
-#endif
   ComValue retval(list);
   push_stack(retval);
 }
@@ -413,10 +404,6 @@ void InvoSteerValueFunc::execute() {
     for (int i=0; i<size; i++) 
       list->Append(new AttributeValue(context()->IsA(ALU_COMP) ? ComValue::nullval() : ComValue::blankval()));
 
-#ifdef ARCH_READY
-  if(context() && context()->IsA(ALU_COMP)) ((AluComp*)context())->steermask(steerv.int_val() ? 0xe : 0xb);
-#endif
-
   ComValue retval(list);
   push_stack(retval);
   delete [] argsv;
@@ -444,9 +431,6 @@ void InvoSteerDelimFunc::execute() {
     else
       list->Append(new AttributeValue(ComValue::blankval()));
     if (!delim_flag) list->Append(new AttributeValue(vordv));
-#ifdef ARCH_READY
-    if(context()->IsA(ALU_COMP)) ((AluComp*)context())->steermask(delim_flag ? 0x3 : 0x6);
-#endif
     ComValue retval(list);
     push_stack(retval);
   } else 

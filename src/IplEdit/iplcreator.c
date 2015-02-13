@@ -12,9 +12,6 @@
 
 #include <OverlayUnidraw/ovclasses.h>
 
-#if defined(ARCH_READY)
-#include <IplEdit/archviews.h>
-#endif
 #include <IplEdit/iplabout.h>
 #include <IplEdit/iplclasses.h>
 #include <IplEdit/iplcmds.h>
@@ -22,9 +19,6 @@
 #include <IplEdit/iplscripts.h>
 #include <IplEdit/iplviews.h>
 
-#if defined(ARCH_READY)
-#include <IplServ/archscripts.h>
-#endif
 #include <IplServ/iplscripts.h>
 
 #include <OverlayUnidraw/ovarrow.h>
@@ -76,24 +70,6 @@ void* IplCreator::Create (ClassId id) {
     if (id == DISTANT_VIEW)    return new DistantView;
     if (id == DISTANT_SCRIPT)  return new DistantScript;
     if (id == DISTANT_PS)      return new PicturePS;
-#endif
-
-#if defined(ARCH_READY)
-    if (id == ALU_VIEW)    return new AluView;
-    if (id == ALU_SCRIPT)  return new AluScript;
-    if (id == ALU_PS)      return new PicturePS;
-
-    if (id == IAD_VIEW)    return new IadView;
-    if (id == IAD_SCRIPT)  return new IadScript;
-    if (id == IAD_PS)      return new PicturePS;
-
-    if (id == OAD_VIEW)    return new OadView;
-    if (id == OAD_SCRIPT)  return new OadScript;
-    if (id == OAD_PS)      return new PicturePS;
-
-    if (id == MEM_VIEW)    return new MemView;
-    if (id == MEM_SCRIPT)  return new MemScript;
-    if (id == MEM_PS)      return new PicturePS;
 #endif
 
     return DrawCreator::Create(id);

@@ -10,10 +10,6 @@
  *
  */
 
-
-#if defined(ARCH_READY)
-#include <IplServ/archfunc.h>
-#endif
 #include <IplServ/eventqueue.h>
 #include <IplServ/iplclasses.h>
 #include <IplServ/iplcomps.h>
@@ -2514,7 +2510,7 @@ int PipesComp::_dst_ready() {
     return 1;
   }
 
-  if (!_complete) 0;
+  if (!_complete) return 0;
 
   // !exclusive()
   if (!exclusive()) {
@@ -2795,36 +2791,10 @@ void InvoComp::dstsizes(int* ndsts, int nndsts) {
 
 void InvoComp::build_invocation()
 {
-#if defined(ARCH_READY)
-  static const int IAD_sym = symbol_add("IAD");
-  static const int OAD_sym = symbol_add("OAD");
-  static const int ALU_sym = symbol_add("ALU");
-  static const int MEM_sym = symbol_add("MEM");
-#endif
-
   ComTerpServ* comterp = ((OverlayUnidraw*)unidraw)->comterp();
 
   // handle special case funcs with unique internal tables
   int funcid = symbol_add((char *)_funcname);
-#if defined(ARCH_READY)
-  if (funcid==IAD_sym) {
-    func(new IadFunc(comterp)); 
-    func()->funcid(IAD_sym);
-  }
-  else if (funcid==OAD_sym) {
-    func(new OadFunc(comterp));
-    func()->funcid(OAD_sym);
-  }
-  else if (funcid==ALU_sym) {
-    func(new AluFunc(comterp));
-    func()->funcid(ALU_sym);
-  }
-  else if (funcid==MEM_sym) {
-    func(new MemFunc(comterp));
-    func()->funcid(MEM_sym);
-  }
-  else {
-#endif
     ComValue funcv(funcid, ComValue::SymbolType);
     ComValue funcv2(comterp->lookup_symval(funcv));
     IplIdrawComp* idrawcomp = (IplIdrawComp*)funcv2.geta(IplIdrawComp::class_symid());
@@ -2835,9 +2805,6 @@ void InvoComp::build_invocation()
       deffunc->defcomp(idrawcomp);
       func(deffunc);
     }
-#if defined(ARCH_READY)
-  }
-#endif
 
   build_pipes();
 }
