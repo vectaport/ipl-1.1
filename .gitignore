@@ -70,3 +70,9 @@ INSTALL~
 src/utils/README~
 
 *.h~
+
+MANIFEST~
+
+src/IplEdit/Imakefile~
+
+src/IplServ/Imakefile~

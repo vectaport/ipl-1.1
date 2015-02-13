@@ -1426,3 +1426,16 @@ void StatsEvalFunc::execute() {
   push_stack(retval);
 }
 
+/*****************************************************************************/
+
+OpenIpdFunc::OpenIpdFunc(ComTerp* comterp) : ComFunc(comterp) {
+}
+
+void OpenIpdFunc::execute() {
+  ComValue pathv(stack_arg(0));
+  reset_stack();
+
+  ComValue retval;
+  push_stack(retval);
+}
+

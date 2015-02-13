@@ -98,8 +98,6 @@ ipl-1.1/src/IplEdit/Imakefile
 ipl-1.1/src/IplEdit/Makefile
 ipl-1.1/src/IplEdit/iplabout.c
 ipl-1.1/src/IplEdit/iplabout.h
-ipl-1.1/src/IplEdit/iplcatalog.c
-ipl-1.1/src/IplEdit/iplcatalog.h
 ipl-1.1/src/IplEdit/iplclasses.h
 ipl-1.1/src/IplEdit/iplcmds.c
 ipl-1.1/src/IplEdit/iplcmds.h
@@ -129,6 +127,8 @@ ipl-1.1/src/IplServ/eventqueue.c
 ipl-1.1/src/IplServ/eventqueue.h
 ipl-1.1/src/IplServ/invofunc.c
 ipl-1.1/src/IplServ/invofunc.h
+ipl-1.1/src/IplServ/iplcatalog.c
+ipl-1.1/src/IplServ/iplcatalog.h
 ipl-1.1/src/IplServ/iplclasses.h
 ipl-1.1/src/IplServ/iplcomps.c
 ipl-1.1/src/IplServ/iplcomps.h

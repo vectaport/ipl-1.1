@@ -18,7 +18,6 @@ MakeLibrary($(LIB),$(VERSION))
 
 #define Obj26(file) MakeObjectFromSrcFlags(file,)
 
-Obj26(iplcatalog)
 Obj26(iplcmds)
 Obj26(iplcomps)
 Obj26(iplcreator)

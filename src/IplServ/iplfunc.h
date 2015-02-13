@@ -534,5 +534,15 @@ public:
 protected:
 };
 
+class OpenIpdFunc : public ComFunc {
+public:
+    OpenIpdFunc(ComTerp*);
+    virtual void execute();
+    virtual const char* docstring() { 
+	return "comp=openipd(path)"; }
+
+protected:
+};
+
 #endif
 
