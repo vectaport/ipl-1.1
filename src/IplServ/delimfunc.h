@@ -63,7 +63,7 @@ public:
     DoubleAngleBracketsFunc(ComTerp*);
     virtual void execute();
     virtual const char* docstring() { 
-      return "<<L> -- run for matched double angle-brackets"; }
+      return "<<>> -- run for matched double angle-brackets"; }
 
 protected:
 };
