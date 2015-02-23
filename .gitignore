@@ -76,3 +76,5 @@ MANIFEST~
 src/IplEdit/Imakefile~
 
 src/IplServ/Imakefile~
+
+config/.#site.def.DARWIN

@@ -14,10 +14,10 @@
  * IplCatalog implementation.
  */
 
-#include <IplEdit/iplcatalog.h>
 #include <IplEdit/iplclasses.h>
 #include <IplEdit/iplcomps.h>
 #include <IplEdit/iplcreator.h>
+#include <IplServ/iplcatalog.h>
 #include <IplServ/iplcomps.h>
 #include <OverlayUnidraw/ovfile.h>
 #include <Unidraw/unidraw.h>
