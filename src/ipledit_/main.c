@@ -14,11 +14,11 @@
  * ipledit main program.
  */
 
-#include <IplEdit/iplcatalog.h>
 
 #include <IplEdit/iplcreator.h>
 #include <IplEdit/ipleditor.h>
 
+#include <IplServ/iplcatalog.h>
 #include <DrawServ/drawserv.h>
 
 #include <InterViews/world.h>
@@ -163,8 +163,8 @@ int main (int argc, char** argv) {
     Dispatcher::instance(new AceDispatcher(ComterpHandler::reactor_singleton()));
 #endif
 
-    IplCreator creator;
-    IplCatalog* catalog = new IplCatalog("ipledit]", &creator);
+    IplEditCreator creator;
+    IplCatalog* catalog = new IplCatalog("ipledit", &creator);
     DrawServ* unidraw = new DrawServ(
         catalog, argc, argv, options, properties
     );

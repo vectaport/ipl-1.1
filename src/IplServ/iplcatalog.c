@@ -14,9 +14,9 @@
  * IplCatalog implementation.
  */
 
-#include <IplEdit/iplclasses.h>
-#include <IplEdit/iplcomps.h>
-#include <IplEdit/iplcreator.h>
+#include <IplServ/iplclasses.h>
+#include <IplServ/iplcomps.h>
+#include <IplServ/iplcreator.h>
 #include <IplServ/iplcatalog.h>
 #include <IplServ/iplcomps.h>
 #include <OverlayUnidraw/ovfile.h>
@@ -43,11 +43,11 @@ boolean IplCatalog::Retrieve (const char* name, Component*& comp) {
     OverlayCatalog::Instance(this);
 
     if (Valid(name, comp)) {
-        _valid = true;
-
+      _valid = true;
+      
     } else if (UnidrawFormat(name)) {
-        _valid = Catalog::Retrieve(name, comp);
-
+      _valid = Catalog::Retrieve(name, comp);
+      
     } else {
         filebuf fbuf;
         _valid = fbuf.open(name, ios_base::in) != 0;
@@ -142,7 +142,7 @@ IplCatalog* IplCatalog::Instance() {
     if (Component::use_unidraw()) 
       _instance = (IplCatalog*)unidraw->GetCatalog();
     else
-      _instance = new IplCatalog("IplCatalog", new IplCreator());
+      _instance = new IplCatalog("IplCatalog", new IplServCreator());
   }
   return _instance;
 }

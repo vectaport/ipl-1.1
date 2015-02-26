@@ -369,3 +369,17 @@ void DistantScript::Attributes(ostream& out) {
   PipeScript::Attributes(out);
 }
 #endif /* defined(HAVE_ACE) */
+
+/*****************************************************************************/
+
+IplIdrawScript::IplIdrawScript (IplIdrawComp* subj) : DrawIdrawScript(subj) 
+{
+}
+
+ClassId IplIdrawScript::GetClassId () { return IPL_IDRAW_SCRIPT; }
+
+boolean IplIdrawScript::IsA (ClassId id) { 
+    return IPL_IDRAW_SCRIPT == id || DrawIdrawScript::IsA(id);
+}
+
+

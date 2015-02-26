@@ -19,8 +19,6 @@
 #include <IplEdit/iplscripts.h>
 #include <IplEdit/iplviews.h>
 
-#include <IplServ/iplscripts.h>
-
 #include <OverlayUnidraw/ovarrow.h>
 #include <OverlayUnidraw/ovpspict.h>
 #include <OverlayUnidraw/ovpsview.h>
@@ -29,9 +27,9 @@
 
 /*****************************************************************************/
 
-IplCreator::IplCreator () { }
+IplEditCreator::IplEditCreator () { }
 
-void* IplCreator::Create (
+void* IplEditCreator::Create (
     ClassId id, istream& in, ObjectMap* objmap, int objid
 ) {
     switch (id) {
@@ -41,36 +39,29 @@ void* IplCreator::Create (
     }
 }
 
-void* IplCreator::Create (ClassId id) {
+void* IplEditCreator::Create (ClassId id) {
     if (id == IPL_IDRAW_VIEW)    return new IplIdrawView;
-    if (id == IPL_IDRAW_SCRIPT)  return new IplIdrawScript;
     if (id == IPL_IDRAW_PS)      return new OverlayIdrawPS;
 
     if (id == PIPE_VIEW)    return new PipeView;
-    if (id == PIPE_SCRIPT)  return new PipeScript;
     if (id == PIPE_PS)      return new PicturePS;
 
     if (id == CONN_VIEW)    return new ConnView;
-    if (id == CONN_SCRIPT)  return new ConnScript;
     if (id == CONN_PS)      return new ArrowLinePS;
 
     if (id == ARBITER_VIEW)   return new ArbiterView;
-    if (id == ARBITER_SCRIPT) return new ArbiterScript;
     if (id == ARBITER_PS)     return new PicturePS;
 
     if (id == FORK_VIEW)    return new ForkView;
-    if (id == FORK_SCRIPT)  return new ForkScript;
     if (id == FORK_PS)      return new PicturePS;
 
     if (id == INVO_VIEW)    return new InvoView;
-    if (id == INVO_SCRIPT)  return new InvoScript;
     if (id == INVO_PS)      return new PicturePS;
 
 #ifdef HAVE_ACE
     if (id == DISTANT_VIEW)    return new DistantView;
-    if (id == DISTANT_SCRIPT)  return new DistantScript;
     if (id == DISTANT_PS)      return new PicturePS;
 #endif
 
-    return DrawCreator::Create(id);
+    return IplServCreator::Create(id);
 }

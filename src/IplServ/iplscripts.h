@@ -13,6 +13,7 @@
 #ifndef iplscripts_h
 #define iplscripts_h
 
+#include <IplServ/iplcomps.h>
 #include <OverlayUnidraw/scriptview.h>
 #include <DrawServ/drawcomps.h>
 #include <GraphUnidraw/nodecomp.h>
@@ -98,5 +99,14 @@ public:
     void Attributes(ostream& out);
 };
 #endif
+
+class IplIdrawScript : public DrawIdrawScript {
+public:
+    virtual ClassId GetClassId();
+    virtual boolean IsA(ClassId);
+    IplIdrawScript(IplIdrawComp* = nil);
+
+    virtual const char* script_name() { return "ipledit"; }
+};
 
 #endif

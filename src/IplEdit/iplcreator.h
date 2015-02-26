@@ -10,14 +10,14 @@
  *
  */
 
-#ifndef iplcreator_h
-#define iplcreator_h
+#ifndef ipleditcreator_h
+#define ipleditcreator_h
 
-#include <DrawServ/drawcreator.h>
+#include <IplServ/iplcreator.h>
 
-class IplCreator : public DrawCreator {
+class IplEditCreator : public IplServCreator {
  public:
-    IplCreator();
+    IplEditCreator();
 
     virtual void* Create(                       // for subjects
         ClassId, istream&, ObjectMap* = nil, int = 0

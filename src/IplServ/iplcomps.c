@@ -1855,12 +1855,12 @@ ForkComp::ForkComp(istream& in, OverlayComp* parent) : PipeComp(in, parent)
     
 void ForkComp::init() {
   _forking = false;
-  if (GetGraphic()) GetGraphic()->SetPattern(pssolid);
+  if (Component::use_unidraw() && GetGraphic()) GetGraphic()->SetPattern(pssolid);
   _prepped = 0;
   _upflag = 0;
   _distnamesym = 0;
   _conn = nil;
-  if (GetText()){
+  if (Component::use_unidraw() && GetText()){
     GetGraphic()->concatGS(GetText(), GetGraphic(), GetText()); 
     GetEllipse()->Align(7, GetText(), 1);
   }
@@ -2791,17 +2791,25 @@ void InvoComp::dstsizes(int* ndsts, int nndsts) {
 
 void InvoComp::build_invocation()
 {
-  ComTerpServ* comterp = ((OverlayUnidraw*)unidraw)->comterp();
+    ComTerp* comterp = NULL;
+    if (Component::use_unidraw())
+	comterp = ((OverlayUnidraw*)unidraw)->comterp();
+    else
+	comterp = OverlayComp::comterp();
+    if (!comterp) {
+	fprintf(stderr, "no comterp found for InvoComp::build_invocation\n");
+	return;
+    }
 
-  // handle special case funcs with unique internal tables
-  int funcid = symbol_add((char *)_funcname);
+    // handle special case funcs with unique internal tables
+    int funcid = symbol_add((char *)_funcname);
     ComValue funcv(funcid, ComValue::SymbolType);
     ComValue funcv2(comterp->lookup_symval(funcv));
     IplIdrawComp* idrawcomp = (IplIdrawComp*)funcv2.geta(IplIdrawComp::class_symid());
     if (!idrawcomp) 
       func((ComFunc*)funcv2.obj_val());
     else {
-      InvoDefFuncFunc* deffunc = new InvoDefFuncFunc(((OverlayUnidraw*)unidraw)->comterp());
+      InvoDefFuncFunc* deffunc = new InvoDefFuncFunc(comterp);
       deffunc->defcomp(idrawcomp);
       func(deffunc);
     }
@@ -2871,6 +2879,9 @@ void InvoComp::build_pipes() {
 
 void InvoComp::build_invocation_graphic()
 {
+
+  if (!Component::use_unidraw()) return;
+
   TextGraphic* name_textgr;
   TextGraphic* src_textgr;
   TextGraphic* dst_textgr;

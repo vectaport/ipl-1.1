@@ -14,12 +14,14 @@
 #include <Attribute/attribute.h>
 #include <Attribute/attrlist.h>
 #include <IplServ/eventqueue.h>
+#include <IplServ/iplcatalog.h>
 #include <IplServ/iplfunc.h>
 #include <IplServ/iplhandler.h>
 #include <IplServ/iplclasses.h>
 #include <IplServ/iplcomps.h>
 #include <IplServ/spritequeue.h>
 
+#include <FrameUnidraw/frameclasses.h>
 #include <Unidraw/Graphic/ellipses.h>
 #include <Unidraw/Graphic/picture.h>
 #include <Unidraw/clipboard.h>
@@ -1435,7 +1437,25 @@ void OpenIpdFunc::execute() {
   ComValue pathv(stack_arg(0));
   reset_stack();
 
-  ComValue retval;
-  push_stack(retval);
+  IplIdrawComp* iplidrawcomp;
+  OverlayComp::comterp(comterp());
+  IplCatalog::Instance()->Retrieve(pathv.symbol_ptr(), (Component*&)iplidrawcomp);
+ 
+  if (!iplidrawcomp) {
+    push_stack(ComValue::nullval());
+    return;
+  } else {
+    FrameComp* framecomp = nil;
+    OverlaysComp* overlayscomp = nil;
+    Iterator it;
+    iplidrawcomp->First(it);
+    framecomp = iplidrawcomp->GetComp(it)->GetClassId() == FRAME_COMP ? (FrameComp*) iplidrawcomp->GetComp(it) : nil;
+    OverlaysComp* topcomp = framecomp ? (OverlaysComp*) framecomp : (OverlaysComp*) iplidrawcomp;
+    topcomp->SetParent(topcomp, nil);
+
+    ComValue retval(new OverlayViewRef(topcomp), OverlaysComp::class_symid());
+    push_stack(retval);
+  }
+
 }
 

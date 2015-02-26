@@ -10,19 +10,16 @@
  *
  */
 
-#ifndef iplscripts2_h
-#define iplscripts2_h
+#ifndef iplcreator_h
+#define iplcreator_h
 
-#include <OverlayUnidraw/scriptview.h>
-#include <DrawServ/drawcomps.h>
-class IplIdrawComp;
-class IplIdrawScript : public DrawIdrawScript {
-public:
-    virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
-    IplIdrawScript(IplIdrawComp* = nil);
+#include <DrawServ/drawcreator.h>
 
-    virtual const char* script_name() { return "ipledit"; }
+class IplServCreator : public DrawCreator {
+ public:
+    IplServCreator();
+
+    virtual void* Create(ClassId);              // for views
 };
 
 #endif

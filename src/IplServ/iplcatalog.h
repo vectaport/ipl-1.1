@@ -11,7 +11,7 @@
  */
 
 /* 
- * IplCatalog - can read and write (serialize/deserialize) components
+ * IplServCatalog - can read and write (serialize/deserialize) components
  */
 
 #ifndef iplcatalog_h

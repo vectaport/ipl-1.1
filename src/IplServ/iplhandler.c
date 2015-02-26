@@ -20,6 +20,10 @@
 #include <IplServ/iplhandler.h>
 #include <IplServ/iplfunc.h>
 #include <IplServ/langfunc.h>
+#include <ComUnidraw/grdotfunc.h>
+#include <ComUnidraw/grlistfunc.h>
+#include <ComUnidraw/grfunc.h>
+#include <ComUnidraw/grstrmfunc.h>
 #include <ComTerp/comterpserv.h>
 
 IplservHandler::IplservHandler(ComTerpServ* serv) : ComterpHandler(serv) {
@@ -27,6 +31,12 @@ IplservHandler::IplservHandler(ComTerpServ* serv) : ComterpHandler(serv) {
 }
 
 void IplservHandler::AddCommands(ComTerp* comterp) {
+  comterp->add_command("dot", new GrDotFunc(comterp));
+  comterp->add_command("attrlist", new GrAttrListFunc(comterp));
+  comterp->add_command("at", new GrListAtFunc(comterp));
+  comterp->add_command("size", new GrListSizeFunc(comterp));
+  comterp->add_command("stream", new GrStreamFunc(comterp));
+
   comterp->add_command("ipl", new IplFunc(comterp));
   comterp->add_command("anglebracketsflag", new AngleBracketsFlagFunc(comterp));
   comterp->add_command("pipe", new CreatePipeFunc(comterp));
@@ -138,6 +148,8 @@ void IplservHandler::AddCommands(ComTerp* comterp) {
   comterp->add_command("STEER", new SteerFunc(comterp));
   comterp->add_command("STEERJ", new SteerJoinFunc(comterp));
   comterp->add_command("transcribe", new TranscribePipeFunc(comterp));
+
+  comterp->add_command("openipd", new OpenIpdFunc(comterp));
 
 }
 
