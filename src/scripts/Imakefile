@@ -5,3 +5,7 @@ XCOMM
 PACKAGE = scripts_ipl
 
 IvmkcmTargets($(PACKAGE))
+
+InstallScriptAs(iplserv_run,$(BINDIR),iplserv_run)
+
+InstallScriptAs(fgstats,$(BINDIR),fgstats)

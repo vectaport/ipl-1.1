@@ -183,6 +183,7 @@ NodeComp* ConnComp::NodeEnd() const {
 }
 
 void ConnComp::build_conn_graphic() {
+  if (!Component::use_unidraw()) return;
   Iterator it;
   unidraw->First(it);
   Editor* editor = unidraw->GetEditor(it);
@@ -204,7 +205,7 @@ void ConnComp::build_conn_graphic() {
 }
 
 void ConnComp::UpdateArrowLine() {
-  if (GetArrowLine()) {
+  if (Component::use_unidraw() && GetArrowLine()) {
     int x0, y0, x1, y1;
     GetArrowLine()->GetOriginal(x0, y0, x1, y1);
     GetArrowLine()->SetTransformer(new Transformer());
@@ -375,7 +376,7 @@ PipeComp::PipeComp(istream& in, OverlayComp* parent) : NodeComp(parent)
   if (GetGraph())
     GraphGraphic();
 
-  if(GetEllipse() && GetText()) {
+  if(Component::use_unidraw() && GetEllipse() && GetText()) {
     GetGraphic()->concatGS(GetEllipse(), GetGraphic(), GetEllipse()); 
     GetGraphic()->concatGS(GetText(), GetGraphic(), GetText()); 
     if (!GetText2()) {
@@ -419,13 +420,13 @@ void PipeComp::init(TextGraphic* txt, TextGraphic* txt2)
   init_global();
 
   // if this is really a PipeComp, makes sure it has a Text2
-  if (!txt2 && GetEllipse()) {
+  if (Component::use_unidraw() && !txt2 && GetEllipse()) {
     txt2 = new TextGraphic("", stdgraphic);
     txt2->SetTransformer(nil);
     GetEllipse()->Align(TopCenter, txt2, BottomCenter);
   }
 
-  if (txt2) {
+  if (Component::use_unidraw() && txt2) {
     GetGraphic()->Append(txt2);
     GetGraphic()->concatGS(GetText2(), GetGraphic(), GetText2()); 
     GetEllipse()->Align(1, txt2, 7);

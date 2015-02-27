@@ -217,6 +217,7 @@ int main(int argc, char *argv[]) {
       #else
       IplservHandler* stdin_handler = new IplservHandler();
       ComTerp* terp = stdin_handler->comterp();
+      if (argc-2>0) terp->set_args(argc-2, argv+2);
       #endif
       if (run_flag && argc > 2 ) {
         const char *rfile = argv[2];

@@ -1,0 +1,16 @@
+#!/usr/bin/env iplserv_run
+print("Path:  %s\n" arg(1))
+fg=openipd(arg(1))
+print("Size:  %d\n" size(fg))
+npipes=nconns=ninvos=nforks=0
+for(i=0 i<size(fg) i++
+  if(class(at(fg i))==`PipeComp :then npipes++);
+  if(class(at(fg i))==`ConnComp :then nconns++);
+  if(class(at(fg i))==`InvoComp :then ninvos++);
+  if(class(at(fg i))==`ForkComp :then nforks++))
+print("Pipes:  %d\n" npipes)
+print("Conns:  %d\n" nconns)
+print("Invos:  %d\n" ninvos)
+print("Forks:  %d\n" nforks)
+print("Other:  %d\n" size(fg)-npipes-nconns-ninvos-nforks)
+exit

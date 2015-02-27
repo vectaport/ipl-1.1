@@ -78,3 +78,17 @@ src/IplEdit/Imakefile~
 src/IplServ/Imakefile~
 
 config/.#site.def.DARWIN
+
+scripts/iplserv_run~
+
+scripts/printio~
+
+src/scripts/Imakefile~
+
+src/scripts/printio~
+
+*.ipd~
+
+src/scripts/iplserv_run~
+
+src/scripts/fgstats~
