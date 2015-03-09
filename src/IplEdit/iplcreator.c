@@ -16,8 +16,8 @@
 #include <IplEdit/iplclasses.h>
 #include <IplEdit/iplcmds.h>
 #include <IplEdit/iplcreator.h>
-#include <IplEdit/iplscripts.h>
 #include <IplEdit/iplviews.h>
+#include <IplServ/iplscripts.h>
 
 #include <OverlayUnidraw/ovarrow.h>
 #include <OverlayUnidraw/ovpspict.h>

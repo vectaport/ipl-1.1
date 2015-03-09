@@ -15,11 +15,11 @@
  */
 
 #include <IplEdit/iplimport.h>
-#include <IplEdit/iplcatalog.h>
 #include <IplEdit/iplcomps.h>
 #include <IplEdit/iplclasses.h>
 #include <IplEdit/iplcmds.h>
 #include <IplEdit/ipleditor.h>
+#include <IplServ/iplcatalog.h>
 
 #include <DrawServ/drawcmds.h>
 #include <FrameUnidraw/framecmds.h>

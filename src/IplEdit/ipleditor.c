@@ -13,11 +13,11 @@
 #include <IplEdit/ipleditor.h>
 #include <IplEdit/iplfunc.h>
 #include <IplEdit/iplclasses.h>
-#include <IplEdit/iplcatalog.h>
 #include <IplEdit/iplcomps.h>
 #include <IplEdit/iplcreator.h>
 #include <IplEdit/iplviewer.h>
 
+#include <IplServ/iplcatalog.h>
 #include <IplServ/iplfunc.h>
 #include <IplServ/iplhandler.h>
 
