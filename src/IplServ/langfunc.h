@@ -164,6 +164,8 @@ public:
     virtual const char* docstring() { 
       return "transcribe(pipe) -- transcribe pipe to external format"; }
 
+    static void randchars(char* randbuf, int size);
+
 protected:
 };
 

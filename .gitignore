@@ -92,3 +92,7 @@ src/scripts/printio~
 src/scripts/iplserv_run~
 
 src/scripts/fgstats~
+
+src/scripts/fgexp~
+
+*.c#

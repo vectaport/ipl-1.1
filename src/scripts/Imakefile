@@ -8,4 +8,5 @@ IvmkcmTargets($(PACKAGE))
 
 InstallScriptAs(iplserv_run,$(BINDIR),iplserv_run)
 
+InstallScriptAs(fgexp,$(BINDIR),fgexp)
 InstallScriptAs(fgstats,$(BINDIR),fgstats)

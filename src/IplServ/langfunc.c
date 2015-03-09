@@ -423,22 +423,28 @@ TranscribePipeFunc::TranscribePipeFunc(ComTerp* comterp) : ComFunc(comterp) {
 
 void TranscribePipeFunc::execute() {
   ComValue compv(stack_arg(0));
+  static int go_symid = symbol_add("go");
+  ComValue gov(stack_key(go_symid));
+  int gof = gov.is_true();
   reset_stack();
 
   OverlayComp* comp = compv.obj_val() ? ((OverlayView*)compv.obj_val())->GetOverlayComp() : nil;
   PipeComp* pipecomp = comp && comp->IsA(PIPE_COMP) ? (PipeComp*)comp : nil;
   InvoComp* invocomp = comp && comp->IsA(INVO_COMP) ? (InvoComp*)comp : nil;
   if (pipecomp) {
-    
+
     char buffer[BUFSIZ];
     int cnt=0;
     const char* name = symbol_pntr(pipecomp->namesym());
     if (invocomp || strlen(name)>0) 
       cnt+=snprintf(buffer+cnt, BUFSIZ-cnt, "%s", 
 		    invocomp ? invocomp->funcname() : symbol_pntr(pipecomp->namesym()));
-    else
-      cnt+=snprintf(buffer+cnt, BUFSIZ-cnt, "gen_%lx", (unsigned long) pipecomp);
-
+    else {
+        char rstring[9];
+	randchars(rstring, 8);
+	cnt+=snprintf(buffer+cnt, BUFSIZ-cnt, "%s", rstring);
+    }
+	
     boolean mutex_flag = 0;
     cnt+=snprintf(buffer+cnt, BUFSIZ-cnt, invocomp ? "(" : "<");
     mutex_flag = invocomp && invocomp->nsrcsizes()>1;
@@ -462,8 +468,9 @@ void TranscribePipeFunc::execute() {
 	    const char* pname = symbol_pntr(pcomp->namesym());
 	    if (strlen(pname)>0) 
 	      cnt+=snprintf(buffer+cnt, BUFSIZ-cnt, "$%s", symbol_pntr(pcomp->namesym()));
-	    else
+	    else {
 	      cnt+=snprintf(buffer+cnt, BUFSIZ-cnt, "$gen_%lx", (unsigned long) pcomp);
+	    }
 	  }
 #if 0
 	  // optional initial value
@@ -506,4 +513,8 @@ void TranscribePipeFunc::execute() {
   return;
 }
 
+void TranscribePipeFunc::randchars(char* randbuf, int size) {
+  for (int i=0; i<size; i++)
+    randbuf[i] = 0x61+(rand()%26);
+}
 
