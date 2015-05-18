@@ -24,10 +24,9 @@ to explain how to use ipledit to compose programs.
 The Invocation Language, along with Null-Convention Logic (also
 invented by Karl Fant -- see his first book "Logically Determined
 Design: Clockless System Design with NULL Convention Logic" --
-Wiley-Interscience, 2005) represents a fundamentally new and different
-way of creating and programming computers, derived from a theory that
-re-lays the foundations of computer science, expanding it to encompass
-physical and biological processes as well as those of human design.
+Wiley-Interscience, 2005) stems from a more natural perspective of
+computing that encompass physical and biological processes as well
+as those of human design.
 
 This software is a work in progress, an active test-bed for the ideas
 embedded in Karl's books.  At the same time it is the pinnacle of
@@ -43,7 +42,7 @@ improve this distribution over time, and to clarify its use with
 improved documentation and examples.  In some sense this is the
 software that should have been on a CD that came with the book.  It
 can be quite entertaining and illuminating to use this software to
-bring the concepts in Karl's books alive.
+bring the concepts in Karl's books (and in nature) alive.
 
 Scott Johnston
 March 2008
