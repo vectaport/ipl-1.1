@@ -1,4 +1,5 @@
 		       README for ipl-1.1
+		       http://ipl.sf.net
 
 Read the INSTALL file for instructions on how to build this release
 from source.  This software builds on top of ivtools, a C++ toolkit
