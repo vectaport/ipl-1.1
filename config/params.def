@@ -368,9 +368,9 @@
 #endif
 #endif
 
-#ifndef SharedCCFlags
+#if !defined(SharedCCFlags)
 #if HasDynamicSharedLibraries
-#define SharedCCFlags -PIC
+#define SharedCCFlags -fPIC
 #else
 #define SharedCCFlags /**/
 #endif
