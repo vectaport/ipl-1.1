@@ -277,7 +277,7 @@ void BracesFunc::execute() {
   ComValue retval(new OverlayViewRef(pipescomp), PipesComp::class_symid());
   push_stack(retval);
   if (num==0) {
-    delete insidevals;
+    delete [] insidevals;
     return;
   }
 

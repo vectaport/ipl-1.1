@@ -55,6 +55,7 @@ using std::streambuf;
 
 #include <iostream>
 #include <math.h>
+#include <unistd.h>
 
 using std::cout;
 using std::cerr;
@@ -4204,8 +4205,6 @@ Component* IplIdrawComp::Copy () {
 
 /****************************************************************************/
 
-#if defined(HAVE_ACE)
-
 int DistantComp::_symid = -1;
 AttributeValueList* DistantComp::_distant_list = nil;
 int DistantComp::_first_cycle = 0;
@@ -4254,9 +4253,11 @@ void DistantComp::init()
   _upflag = 0;
   _distant_request = 1;
   _cycle_ready = 0;
+  #ifdef HAVE_ACE
   _addr = nil;
   _socket = nil;
   _conn = nil;
+  #endif
   _disabled = -1;
   _distnamesym = 0;
 
@@ -4273,12 +4274,14 @@ void DistantComp::init()
 }
 
 DistantComp::~DistantComp() {
+  #ifdef HAVE_ACE
   if (_socket && _socket->close () == -1)
     fprintf(stderr, "error closing socket in DistantComp destructor\n");
   delete _conn;
   delete _socket;
   delete _addr;
-
+  #endif
+  
   Iterator it;
   if(_distant_list) {
     _distant_list->First(it);
@@ -4308,6 +4311,7 @@ boolean DistantComp::IsA (ClassId id) {
 
 void DistantComp::_src_request() {
 
+#ifdef HAVE_ACE
   if (!_prepped) {
     prep();
     _prepped = true;
@@ -4331,6 +4335,11 @@ void DistantComp::_src_request() {
   cout << "sending:  " << sbufstr;
   delete sbufstr;
 
+#else
+  fprintf(stderr, "DistantComp needs to be built with ACE\n");
+#endif
+  
+
 }
 
 int DistantComp::_src_ready() {
@@ -4343,6 +4352,7 @@ int DistantComp::_src_ready() {
 
 void DistantComp::_dst_notify() {
 
+#ifdef HAVE_ACE
   if (!_prepped) {
     prep();
     _prepped = true;
@@ -4376,6 +4386,10 @@ void DistantComp::_dst_notify() {
   } else
     fprintf(stderr, "DistantComp::_dst_notify  unexpected NULL AttributeValue\n");
 
+#else
+  fprintf(stderr, "DistantComp needs to be built with ACE\n");
+#endif
+  
   return;
   
 }
@@ -4397,6 +4411,7 @@ boolean DistantComp::disabled() {
 }
 
 void DistantComp::prep() {
+ #ifdef HAVE_ACE
   static int upflagsym = symbol_add("upflag");
   AttributeValue* upflagval = FindValue(upflagsym);
   _upflag = upflagval && upflagval->is_true();
@@ -4425,6 +4440,11 @@ void DistantComp::prep() {
   }
   
   fprintf(stderr, "expected failure in prepping DistantComp\n");
+#else
+  fprintf(stderr, "DistantComp needs to be built with ACE\n");
+#endif
+  
+
 }
 
 Component* DistantComp::Copy() {
@@ -4453,6 +4473,7 @@ int DistantComp::upflag() {
 }
 
 int DistantComp::cycle() {
+#ifdef HAVE_ACE
   if (PipeComp::_eventqueueflag>=2) {
     unidraw->Update(true);
 
@@ -4555,6 +4576,10 @@ int DistantComp::cycle() {
 #if 0
   cout << ".";
 #endif
+
+#else
+  fprintf(stderr, "DistantComp needs to be built with ACE\n");
+#endif
   return 1;
 }
 
@@ -4589,5 +4614,3 @@ int DistantComp::ready() {
   if(PipeComp::_eventqueue) PipeComp::_eventqueue->tick();
   return cycle();
 }
-
-#endif /* defined(HAVE_ACE) */

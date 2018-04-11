@@ -895,7 +895,6 @@ void CycleCountFunc::execute() {
 
 /*****************************************************************************/
 
-#ifdef HAVE_ACE
 ReadyFunc::ReadyFunc(ComTerp* comterp) : ComFunc(comterp) {
 }
 
@@ -912,7 +911,6 @@ void ReadyFunc::execute() {
     comp->ready();
     push_stack(ComValue::blankval());
 }
-#endif
 
 /*****************************************************************************/
 

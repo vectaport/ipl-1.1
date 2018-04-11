@@ -31,6 +31,7 @@
 
 #include <iostream.h>
 #include <string.h>
+#include <unistd.h>
 
 #include <IV-2_6/_enter.h>
 
