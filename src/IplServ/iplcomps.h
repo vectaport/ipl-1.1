@@ -755,6 +755,7 @@ protected:
 class ACE_INET_Addr;
 class ACE_SOCK_Stream;
 class ACE_SOCK_Stream;
+#endif
 class ComValue;
 
 class DistantComp : public PipeComp {
@@ -833,9 +834,11 @@ public:
 protected:
     int _distant_request;
     int _cycle_ready;
+#ifdef HAVE_ACE
     ACE_INET_Addr* _addr;
     ACE_SOCK_Stream* _socket;
     ACE_SOCK_Connector* _conn;
+#endif
     int _distnamesym;
     boolean _prepped;
     boolean _upflag;
@@ -852,7 +855,6 @@ protected:
     CLASS_SYMID("DistantComp");
 
 };
-#endif
 
 #define MANUAL_BREAKPOINT
 #ifdef MANUAL_BREAKPOINT

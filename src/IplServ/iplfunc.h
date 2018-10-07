@@ -334,7 +334,6 @@ public:
 protected:
 };
 
-#ifdef HAVE_ACE
 class ReadyFunc : public ComFunc {
 public:
     ReadyFunc(ComTerp*);
@@ -344,7 +343,6 @@ public:
 
 protected:
 };
-#endif
 
 class LastInputFunc : public ComFunc {
 public:
