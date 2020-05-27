@@ -1,5 +1,6 @@
 /*
- * Copyright 2005-2008 Theseus Research Inc., All Rights Reserved.
+ * Copyright 2014-2018 Vectaport Consulting
+ * Copyright 2005-2008 Theseus Research Inc.
  * 
  * This file may be used under the terms of the GNU General Public
  * License version 2.0 as published by the Free Software Foundation                                
