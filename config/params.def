@@ -406,7 +406,7 @@
 #endif
 
 #ifndef LanguageCCDefines
-#define LanguageCCDefines -Dcplusplus_2_1
+#define LanguageCCDefines -std=c++11 -Dcplusplus_2_1
 #endif
 
 #ifndef BackwardCompatibilityCCDefines

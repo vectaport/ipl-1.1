@@ -20,7 +20,7 @@
 	IVTOOLSLIBDIR = /usr/local/lib
 
         IVTOOLSSRC = /usr/local
-   IVTOOLS_VERSION = 1.2.11
+   IVTOOLS_VERSION = 2.0.11
 
 LIBUNIDRAWCOMMON = -L$(LIBDIR) -lUnidraw-common
 LIBIVCOMMON = -L$(LIBDIR) -lIV-common
@@ -122,7 +122,7 @@ DEPIPLEDIT = $(IPLSRC)/IplEdit/$(CPU)/libIplEdit.$(VERSION).dylib
 
           CCDEFINES = $(APP_CCDEFINES) $(IV_CCDEFINES) $(OTHER_CCDEFINES) $(EXTRA_CCDEFINES)
        IV_CCDEFINES = $(LANGUAGE_CCDEFINES) $(BACKWARD_CCDEFINES)
- LANGUAGE_CCDEFINES = -Dcplusplus_2_1 -Wno-deprecated
+ LANGUAGE_CCDEFINES = -std=c++11 -Dcplusplus_2_1 -Wno-deprecated
  BACKWARD_CCDEFINES =
     EXTRA_CCDEFINES =
 
@@ -147,7 +147,7 @@ CLIPPOLY_CCINCLUDES =
     PROJ_CCINCLUDES =
              VTKDIR = VtkDir
         CLIPPOLYDIR = ClipPolyDir
-             ACEDIR = /Users/scott/src/ACE_wrappers
+             ACEDIR = /usr/local/Cellar/ace/7.0.5/include
 
           CCLDFLAGS = $(APP_CCLDFLAGS) $(IV_CCLDFLAGS) $(OTHER_CCLDFLAGS) $(EXTRA_CCLDFLAGS)
        IV_CCLDFLAGS = \
@@ -197,7 +197,7 @@ NONSHARED_CCLDFLAGS =
      CLIPPOLYLIBDIR =
     CLIPPOLYLIBBASE = libclipoly.so.1.0
        ACE_CCLDLIBS = -L$(ACEDIR)/ace -lACE
-          ACELIBDIR = /Users/scott/src/ACE_wrappers/ace
+          ACELIBDIR = /usr/local/lib
          ACELIBBASE = libACE.so
 
             INSTALL = install

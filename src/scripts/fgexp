@@ -1,6 +1,6 @@
 #!/usr/bin/env iplserv_run
 fg=openipd(arg(1))
-sfg=$fg
+sfg=$$fg
 while(v=next(sfg)
   if(class(v)==`InvoComp||class(v)==`PipeComp :then
     print("%s\n" transcribe(v :go))))
