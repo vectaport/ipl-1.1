@@ -406,7 +406,7 @@
 #endif
 
 #ifndef LanguageCCDefines
-#define LanguageCCDefines -std=c++11 -Dcplusplus_2_1
+#define LanguageCCDefines -std=c++14 -Dcplusplus_2_1
 #endif
 
 #ifndef BackwardCompatibilityCCDefines
@@ -443,7 +443,7 @@
 
 #ifndef AceCCDefines
 #ifdef AceDir
-#define AceCCDefines -DHAVE_ACE
+#define AceCCDefines -DHAVE_ACE -std=c++17
 #else
 #define AceCCDefines /**/
 #endif
@@ -571,7 +571,12 @@ CLIPPOLY_CCINCLUDES = ClipPolyCCIncludes
     PROJ_CCINCLUDES = ProjCCIncludes
              VTKDIR = VtkDir
         CLIPPOLYDIR = ClipPolyDir
+#ifdef AceDir	
              ACEDIR = AceDir
+#endif	     
+#ifdef AceLibDir
+          ACELIBDIR = AceLibDir
+#endif
 
 /*
  * Define the flags passed to the CC driver when we link a C++ program.
@@ -825,7 +830,7 @@ NONSHARED_CCLDFLAGS = NonSharedCCLdFlags
 
 #ifndef AceCCLdLibs
 #ifdef AceDir
-#define AceCCLdLibs -L$(ACEDIR)/ace -lACE
+#define AceCCLdLibs -L$(ACELIBDIR) -lACE
 #else
 #define AceCCLdLibs /**/
 #endif

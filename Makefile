@@ -20,7 +20,7 @@
 	IVTOOLSLIBDIR = /usr/local/lib
 
         IVTOOLSSRC = /usr/local
-   IVTOOLS_VERSION = 2.0.11
+   IVTOOLS_VERSION = 2.1.1
 
 LIBUNIDRAWCOMMON = -L$(LIBDIR) -lUnidraw-common
 LIBIVCOMMON = -L$(LIBDIR) -lIV-common
@@ -102,7 +102,7 @@ DEPIPLEDIT = $(IPLSRC)/IplEdit/$(CPU)/libIplEdit.$(VERSION).dylib
            CCSUFFIX = c
             CDRIVER = gcc
             CSUFFIX = c
-                SRC = /Users/scott/src/ipl-1.1/.
+                SRC = /Users/scottjohnston/src/ipl-1.1/.
               SLASH = /
                SRCS = $(SRC)$(SLASH)*.$(CCSUFFIX)
                OBJS = *.o
@@ -128,7 +128,7 @@ DEPIPLEDIT = $(IPLSRC)/IplEdit/$(CPU)/libIplEdit.$(VERSION).dylib
 
       VTK_CCDEFINES =
  CLIPPOLY_CCDEFINES =
-      ACE_CCDEFINES = -DHAVE_ACE
+      ACE_CCDEFINES = -DHAVE_ACE -std=c++17
 
          CCINCLUDES = $(APP_CCINCLUDES) $(IV_CCINCLUDES) $(OTHER_CCINCLUDES) $(EXTRA_CCINCLUDES)
       IV_CCINCLUDES = \
@@ -147,7 +147,10 @@ CLIPPOLY_CCINCLUDES =
     PROJ_CCINCLUDES =
              VTKDIR = VtkDir
         CLIPPOLYDIR = ClipPolyDir
-             ACEDIR = /usr/local/Cellar/ace/7.0.5/include
+
+             ACEDIR = /opt/homebrew/Cellar/ace/7.1.0/include
+
+          ACELIBDIR = /opt/homebrew/lib
 
           CCLDFLAGS = $(APP_CCLDFLAGS) $(IV_CCLDFLAGS) $(OTHER_CCLDFLAGS) $(EXTRA_CCLDFLAGS)
        IV_CCLDFLAGS = \
@@ -196,8 +199,8 @@ NONSHARED_CCLDFLAGS =
   CLIPPOLY_CCLDLIBS =
      CLIPPOLYLIBDIR =
     CLIPPOLYLIBBASE = libclipoly.so.1.0
-       ACE_CCLDLIBS = -L$(ACEDIR)/ace -lACE
-          ACELIBDIR = /usr/local/lib
+       ACE_CCLDLIBS = -L$(ACELIBDIR) -lACE
+          ACELIBDIR = /opt/homebrew/lib
          ACELIBBASE = libACE.so
 
             INSTALL = install
@@ -226,9 +229,9 @@ NONSHARED_CCLDFLAGS =
              RM_CMD = $(RM) ,* .emacs_* *..c *.BAK *.CKP *.a *.bak *.ln *.o a.out core errs make.log make.out tags TAGS
               TROFF = groff
 
-                TOP = /Users/scott/src/ipl-1.1
+                TOP = /Users/scottjohnston/src/ipl-1.1
              RELTOP = .
-        CURRENT_DIR = /Users/scott/src/ipl-1.1
+        CURRENT_DIR = /Users/scottjohnston/src/ipl-1.1
 
               IVSRC = $(IVTOOLSSRC)
              BINSRC = $(VHCLMAPSSRC)/bin
