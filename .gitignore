@@ -42,6 +42,14 @@ src/iplserv_/DARWIN/Makefile
 
 src/IplServ/DARWIN/Makefile
 
+src/ipledit_/DARWIN
+
+src/IplEdit/DARWIN
+
+src/iplserv_/DARWIN
+
+src/IplServ/DARWIN/
+
 Makefile
 
 make.make
